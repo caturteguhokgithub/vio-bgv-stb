@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -14,18 +13,23 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { blue, grey } from "@mui/material/colors";
-import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
-
-import { paths } from "@/lib/paths";
-// import { IconFA } from "@/components/icons/icon-fa";
-
 import { MenuItems } from "./menuItems";
 
-export function SideNav(): React.JSX.Element {
-  const pathname = usePathname();
+export function SideNav({
+  toggleCollapse,
+}: {
+  toggleCollapse: boolean;
+}): React.JSX.Element {
   const [open, setOpen] = useState<Record<string, boolean>>({});
+  const [toggleHoverCollapse, setToggleHoverCollapse] = useState(false);
+
+  const handleHoverCollapse = () => {
+    setToggleHoverCollapse(!toggleHoverCollapse);
+  };
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const newOpen: Record<string, boolean> = {};
@@ -61,7 +65,8 @@ export function SideNav(): React.JSX.Element {
 
   return (
     <Box
-      bgcolor="#F5F7F9"
+      // bgcolor="#F5F7F9"
+      bgcolor={grey[50]}
       // borderRight="1px solid var(--mui-palette-divider)"
       sx={{
         display: { xs: "none", lg: "flex" },
@@ -72,15 +77,51 @@ export function SideNav(): React.JSX.Element {
         position: "fixed",
         scrollbarWidth: "none",
         top: 0,
-        width: "var(--SideNav-width)",
+        width: toggleCollapse ? "72px" : "var(--SideNav-width)",
         zIndex: "var(--SideNav-zIndex)",
         "&::-webkit-scrollbar": { display: "none" },
+        transition: "width 300ms ease-in-out",
+        ...(toggleCollapse && {
+          "&:hover": {
+            width: "var(--SideNav-width)",
+          },
+        }),
       }}
+      onMouseEnter={handleHoverCollapse}
+      onMouseLeave={handleHoverCollapse}
     >
       <Stack direction="row" justifyContent="center">
         <Stack justifyContent="center" alignItems="flex-end" height={64}>
-          <Typography color="black" fontSize={16} fontWeight={600}>
-            VIO BGV STB
+          {/* {toggleCollapse && !toggleHoverCollapse ? (
+            <Typography
+              color="black"
+              fontSize={16}
+              fontWeight={600}
+              className="cssanimation fadeInTop"
+            >
+              VBS
+            </Typography>
+          ) : (
+            <Typography
+              color="black"
+              fontSize={16}
+              fontWeight={600}
+              className="cssanimation fadeInTop"
+            >
+              VIO BGV STB
+            </Typography>
+          )} */}
+          <Typography
+            color="black"
+            fontSize={16}
+            fontWeight={600}
+            className={`cssanimation ${
+              toggleCollapse && !toggleHoverCollapse
+                ? "blurInTop"
+                : "blurInBottom"
+            }`}
+          >
+            {toggleCollapse && !toggleHoverCollapse ? "VBS" : "VIO BGV STB"}
           </Typography>
           {/* <Box
             component={Link}
@@ -137,10 +178,15 @@ export function SideNav(): React.JSX.Element {
                           handleClick(groupIndex, itemIndex, !!item.subItems)
                         }
                         sx={{
-                          px: 2,
+                          px: toggleCollapse && !toggleHoverCollapse ? 0 : 2,
+                          justifyContent:
+                            toggleCollapse && !toggleHoverCollapse
+                              ? "center"
+                              : "unset",
                           gap: 1,
                           ...(isActive(item.path) && {
-                            bgcolor: "white",
+                            bgcolor: alpha(blue[700], 0.15),
+                            // color: "white",
                             // boxShadow:
                             //   "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
                             boxShadow: "rgba(0, 0, 0, 0.1) 0px 3px 8px",
@@ -163,85 +209,98 @@ export function SideNav(): React.JSX.Element {
                           <Icon
                             icon={item.icon}
                             color={isActive(item.path) ? blue[700] : "black"}
+                            height={
+                              toggleCollapse && !toggleHoverCollapse ? 24 : 18
+                            }
                           />
                         </ListItemAvatar>
-                        <ListItemText>
-                          <Typography
-                            color={isActive(item.path) ? blue[700] : "black"}
-                            fontSize={14}
-                          >
-                            {item.text}
-                          </Typography>
-                        </ListItemText>
-                        {item.subItems ? (
-                          open[`${groupIndex}-${itemIndex}`] ? (
-                            <Icon icon="material-symbols-light:keyboard-arrow-up" />
-                          ) : (
-                            <Icon icon="material-symbols-light:keyboard-arrow-down" />
-                          )
-                        ) : null}
+                        {toggleCollapse && !toggleHoverCollapse ? null : (
+                          <>
+                            <ListItemText>
+                              <Typography
+                                color={
+                                  isActive(item.path) ? blue[700] : "black"
+                                }
+                                fontSize={14}
+                              >
+                                {item.text}
+                              </Typography>
+                            </ListItemText>
+                            {item.subItems ? (
+                              open[`${groupIndex}-${itemIndex}`] ? (
+                                <Icon icon="material-symbols-light:keyboard-arrow-up" />
+                              ) : (
+                                <Icon icon="material-symbols-light:keyboard-arrow-down" />
+                              )
+                            ) : null}
+                          </>
+                        )}
                       </ListItem>
-                      {item.subItems && (
-                        <Collapse
-                          in={open[`${groupIndex}-${itemIndex}`]}
-                          timeout="auto"
-                          mountOnEnter
-                          unmountOnExit
-                        >
-                          <List
-                            component="div"
-                            disablePadding
-                            sx={{
-                              pr: 5,
-                              mt: 0.5,
-                              mb: 2,
-                              listStyleType: "disc",
-                              a: {
-                                "&::marker": {
-                                  color: grey[400],
-                                },
-                              },
-                            }}
-                          >
-                            {item.subItems.map((subItem) => (
-                              <ListItem
-                                key={subItem.text}
-                                component={Link}
-                                href={subItem.path}
+                      {(!toggleCollapse || toggleHoverCollapse) && (
+                        <>
+                          {item.subItems && (
+                            <Collapse
+                              in={open[`${groupIndex}-${itemIndex}`]}
+                              timeout="auto"
+                              mountOnEnter
+                              unmountOnExit
+                            >
+                              <List
+                                component="div"
+                                disablePadding
                                 sx={{
-                                  display: "list-item",
-                                  ml: 5,
-                                  px: 0,
-                                  py: 0.7,
-                                  // bgcolor:
-                                  //   pathname === subItem.path
-                                  //     ? alpha(blue[100], 0.4)
-                                  //     : "transparent",
-                                  borderRadius: 1,
+                                  pr: 5,
+                                  mt: 0.5,
+                                  mb: 2,
+                                  listStyleType: "disc",
+                                  a: {
+                                    "&::marker": {
+                                      color: grey[400],
+                                    },
+                                  },
                                 }}
                               >
-                                <ListItemText sx={{ m: 0 }}>
-                                  <Typography
-                                    color={
-                                      pathname === subItem.path
-                                        ? blue[700]
-                                        : "black"
-                                    }
-                                    // fontWeight={
-                                    //   pathname === subItem.path
-                                    //     ? 700
-                                    //     : "normal"
-                                    // }
-                                    fontSize="0.83rem"
-                                    lineHeight={1}
+                                {item.subItems.map((subItem) => (
+                                  <ListItem
+                                    key={subItem.text}
+                                    component={Link}
+                                    href={subItem.path}
+                                    sx={{
+                                      display: "list-item",
+                                      ml: 5,
+                                      px: 0,
+                                      py: 0.7,
+                                      // bgcolor:
+                                      //   pathname === subItem.path
+                                      //     ? alpha(blue[100], 0.4)
+                                      //     : "transparent",
+                                      borderRadius: 1,
+                                    }}
                                   >
-                                    {subItem.text}
-                                  </Typography>
-                                </ListItemText>
-                              </ListItem>
-                            ))}
-                          </List>
-                        </Collapse>
+                                    <ListItemText sx={{ m: 0 }}>
+                                      <Typography
+                                        color={
+                                          pathname === subItem.path
+                                            ? blue[700]
+                                            : "black"
+                                        }
+                                        // fontWeight={
+                                        //   pathname === subItem.path
+                                        //     ? 700
+                                        //     : "normal"
+                                        // }
+                                        fontSize="0.83rem"
+                                        lineHeight={1}
+                                      >
+                                        {subItem.text}
+                                      </Typography>
+                                    </ListItemText>
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </Collapse>
+                          )}
+                        </>
                       )}
                     </React.Fragment>
                   ))}

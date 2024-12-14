@@ -3,7 +3,9 @@ import localFont from "next/font/local";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import iTheme from "@/themes/themes";
+import "@/lib/cssanimations/cssanimation.min.css";
 import "@/themes/styles.scss";
+import React from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

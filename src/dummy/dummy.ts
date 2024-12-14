@@ -1,3 +1,50 @@
+export const nameRandom = [
+  "Gayle Bray",
+  "Kirby Weaver",
+  "Sosa Harmon",
+  "Lucille Hayes",
+  "Berg Wolf",
+  "Edwards Beasley",
+  "Kennedy Blankenship",
+  "Frieda Barnett",
+  "Francesca Todd",
+  "Marianne Hoover",
+];
+
+export const emailRandom = [
+  "moorecain@phuel.com",
+  "patsymorse@memora.com",
+  "lisawatkins@bovis.com",
+  "gaylebray@powernet.com",
+  "bergwolf@melbacor.com",
+  "edwardsbeasley@plasmosis.com",
+  "kennedyblankenship@valpreal.com",
+  "friedabarnett@retrack.com",
+  "francescatodd@tribalog.com",
+  "mariannehoover@entogrok.com",
+];
+
+export const deviceType = ["Access Point", "Switch", "Firewall", "Router"];
+
+export const deviceStatus = ["pending", "running"];
+
+export const genreRandom = [
+  "Horror",
+  "Action",
+  "Drama",
+  "Thriller",
+  "Science fiction",
+  "Comedy",
+  "Romance",
+  "Western",
+  "Crime",
+  "Animation",
+  "Experimental",
+  "Documentary",
+  "Fantasy",
+  "Adventure",
+];
+
 export const dataDevice = [
   {
     _id: "675a9dc387ce7bb00260d9ba",

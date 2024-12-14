@@ -17,6 +17,7 @@
     "@mui/material": "^6.1.10",
     "@mui/material-nextjs": "^6.1.9",
     "antd": "^5.22.4",
+    "axios": "^1.7.9",
     "framer-motion": "^11.14.1",
     "keen-slider": "^6.8.6",
     "next": "15.0.4",

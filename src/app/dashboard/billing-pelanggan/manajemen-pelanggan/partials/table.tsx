@@ -8,14 +8,13 @@ import DialogDelete from "@/components/Dialog/delete";
 import DialogComponent from "@/components/Dialog/dialog";
 import FormDevice from "./form";
 import SnackbarAlert from "@/components/Snackbar/snack";
-import { deviceStatus, deviceType } from "@/dummy/dummy";
+import { emailRandom, nameRandom } from "@/dummy/dummy";
 
 interface DataType {
   key?: React.Key;
   name: string;
-  type: string;
-  ipAddress: string;
-  status: string;
+  email: string;
+  phone: string;
   createdAt?: string;
 }
 const onChange: TableProps<DataType>["onChange"] = (
@@ -27,7 +26,7 @@ const onChange: TableProps<DataType>["onChange"] = (
   console.log("params", pagination, filters, sorter, extra);
 };
 
-const TableDevice: React.FC = () => {
+const TableCustomer: React.FC = () => {
   const [dataDevice, setDataDevice] = React.useState<DataType[]>([]);
   const [modalDelete, setModalDelete] = React.useState(false);
   const [modalOpenAdd, setModalOpenAdd] = React.useState(false);
@@ -39,14 +38,13 @@ const TableDevice: React.FC = () => {
   React.useEffect(() => {
     const initialData = Array.from({ length: 123 }).map((_, i) => ({
       key: (i + 1).toString(),
-      name: `Device ${Math.floor(Math.random() * (999 - 100 + 1) + 100)}`,
-      type: `${deviceType[Math.floor(Math.random() * deviceType.length)]}`,
-      ipAddress: `192.168.${Math.floor(
-        Math.random() * (99 - 10 + 1) + 10
-      )}.${Math.floor(Math.random() * (999 - 100 + 1) + 100)}`,
-      status: `${
-        deviceStatus[Math.floor(Math.random() * deviceStatus.length)]
-      }`,
+      name: `${nameRandom[Math.floor(Math.random() * nameRandom.length)]}`,
+      email: `${emailRandom[Math.floor(Math.random() * emailRandom.length)]}`,
+      phone: `+62 ${Math.floor(
+        Math.random() * (999 - 100 + 1) + 100
+      )} ${Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)} ${Math.floor(
+        Math.random() * (9999 - 1000 + 1) + 1000
+      )}`,
       createdAt: "2023-12-12 12:00:00",
     }));
     setDataDevice(initialData);
@@ -67,27 +65,15 @@ const TableDevice: React.FC = () => {
       sorter: true,
     },
     {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
       sorter: true,
     },
     {
-      title: "IP Address",
-      dataIndex: "ipAddress",
-      key: "ipAddress",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      width: 200,
-      sorter: true,
-      render: (status: string) => (
-        <Tag color={status === "pending" ? "red" : "green"}>
-          {status.toUpperCase()}
-        </Tag>
-      ),
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "Created Date",
@@ -184,7 +170,7 @@ const TableDevice: React.FC = () => {
         width={480}
         dialogOpen={modalOpenAdd}
         dialogClose={() => setModalOpenAdd(false)}
-        title="Tambah Device"
+        title="Tambah Pelanggan"
         labelCancel="Batal"
         labelSubmit="Simpan"
         handleModalCancel={() => setModalOpenAdd(false)}
@@ -200,7 +186,7 @@ const TableDevice: React.FC = () => {
         width={480}
         dialogOpen={modalOpenEdit}
         dialogClose={() => setModalOpenEdit(false)}
-        title="Ubah Device"
+        title="Ubah Pelanggan"
         labelCancel="Batal"
         labelSubmit="Simpan"
         handleModalCancel={() => setModalOpenEdit(false)}
@@ -216,7 +202,7 @@ const TableDevice: React.FC = () => {
         width={480}
         dialogOpen={modalOpenView}
         dialogClose={() => setModalOpenView(false)}
-        title="Detail Device"
+        title="Detail Pelanggan"
       >
         <FormDevice mode="view" />
       </DialogComponent>
@@ -233,4 +219,4 @@ const TableDevice: React.FC = () => {
   );
 };
 
-export default TableDevice;
+export default TableCustomer;

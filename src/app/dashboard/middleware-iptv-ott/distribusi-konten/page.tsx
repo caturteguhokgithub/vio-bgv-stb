@@ -1,9 +1,9 @@
 import EmptyState from "@/components/EmptyState/empty";
 import DashboardLayout from "@/components/LayoutDashboard/layout";
 
-export default function NetworkTopologyPage() {
+export default function ContentDistributionPage() {
   return (
-    <DashboardLayout title="Manajemen Topologi Jaringan">
+    <DashboardLayout title="Distribusi Konten">
       <EmptyState />
     </DashboardLayout>
   );

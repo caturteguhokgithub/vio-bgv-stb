@@ -2,28 +2,28 @@
 
 import React from "react";
 import DashboardLayout from "@/components/LayoutDashboard/layout";
-import TableDevice from "./partials/table";
 import { Button, Card } from "@mui/material";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import DialogComponent from "@/components/Dialog/dialog";
 import SnackbarSuccess from "@/components/Snackbar/snack";
 import FormDevice from "./partials/form";
 import BreadcrumbPage from "@/components/Breadcrumb/breadcrumb";
+import TableCustomer from "./partials/table";
 
-export default function DeviceConfigurePage() {
+export default function BillingManagementPage() {
   const [modalOpenAdd, setModalOpenAdd] = React.useState(false);
   const [snackSuccess, setSnackSuccess] = React.useState(false);
 
   const breadcrumbData = [
-    { label: "Manajemen Jaringan", href: "/" },
-    { label: "Konfigurasi Perangkat", href: "/about" },
+    { label: "Billing & Pelanggan", href: "/" },
+    { label: "Manajemen Pelanggan", href: "/about" },
     { label: "List" },
   ];
 
   return (
     <>
       <DashboardLayout
-        title="Konfigurasi Perangkat"
+        title="Manajemen Pelanggan"
         breadcrumbs={<BreadcrumbPage breadcrumbData={breadcrumbData} />}
         actionButton={
           <Button
@@ -33,12 +33,12 @@ export default function DeviceConfigurePage() {
             color="primary"
             onClick={() => setModalOpenAdd(true)}
           >
-            Tambah Perangkat
+            Tambah Pelanggan
           </Button>
         }
       >
         <Card variant="outlined">
-          <TableDevice />
+          <TableCustomer />
         </Card>
       </DashboardLayout>
       <DialogComponent
@@ -46,7 +46,7 @@ export default function DeviceConfigurePage() {
         width={480}
         dialogOpen={modalOpenAdd}
         dialogClose={() => setModalOpenAdd(false)}
-        title="Tambah Device"
+        title="Tambah Pelanggan"
         labelCancel="Batal"
         labelSubmit="Simpan"
         handleModalCancel={() => setModalOpenAdd(false)}

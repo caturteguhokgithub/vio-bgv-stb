@@ -22,9 +22,13 @@ import iTheme from "@/themes/themes";
 export function HeaderNav({
   title,
   isDashboardView,
+  toggleCollapse,
+  handleToggleCollapse,
 }: {
   title?: string;
   isDashboardView?: boolean;
+  toggleCollapse: boolean;
+  handleToggleCollapse?: () => void;
 }): React.JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -100,9 +104,19 @@ export function HeaderNav({
             {title}
           </Typography>
         )} */}
-        <IconButton sx={{ p: 0 }}>
+        <IconButton
+          sx={{ p: 0 }}
+          className={`cssanimation ${
+            toggleCollapse ? "fadeInLeft" : "fadeInRight"
+          }`}
+          onClick={handleToggleCollapse}
+        >
           <Icon
-            icon="line-md:menu-unfold-left"
+            icon={
+              toggleCollapse
+                ? "line-md:menu-unfold-right"
+                : "line-md:menu-unfold-left"
+            }
             height={24}
             color={iTheme.palette.secondary.dark}
           />

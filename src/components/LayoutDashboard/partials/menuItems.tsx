@@ -51,19 +51,19 @@ export const MenuItems: Group[] = [
         subItems: [
           {
             text: "Manajemen Pelanggan",
-            path: "/dashboard/billing-pelanggan/konfigurasi-perangkat",
+            path: "/dashboard/billing-pelanggan/manajemen-pelanggan",
           },
           {
             text: "Penagihan",
-            path: "/dashboard/billing-pelanggan/topologi-jaringan",
+            path: "/dashboard/billing-pelanggan/penagihan",
           },
           {
             text: "Paket Layanan",
-            path: "/dashboard/billing-pelanggan/pengaturan-vlan-ip",
+            path: "/dashboard/billing-pelanggan/paket-layanan",
           },
           {
             text: "Pembayaran",
-            path: "/dashboard/billing-pelanggan/pemantauan-jaringan",
+            path: "/dashboard/billing-pelanggan/pembayaran",
           },
         ],
       },
@@ -74,19 +74,19 @@ export const MenuItems: Group[] = [
         subItems: [
           {
             text: "Manajemen Konten",
-            path: "/dashboard/middleware-iptv-ott/konfigurasi-perangkat",
+            path: "/dashboard/middleware-iptv-ott/manajemen-konten",
           },
           {
             text: "Integrasi OTT",
-            path: "/dashboard/middleware-iptv-ott/topologi-jaringan",
+            path: "/dashboard/middleware-iptv-ott/integrasi-ott",
           },
           {
             text: "Distribusi Konten",
-            path: "/dashboard/middleware-iptv-ott/pengaturan-vlan-ip",
+            path: "/dashboard/middleware-iptv-ott/distribusi-konten",
           },
           {
             text: "Personal Recommendation",
-            path: "/dashboard/middleware-iptv-ott/pemantauan-jaringan",
+            path: "/dashboard/middleware-iptv-ott/personal-recommendation",
           },
         ],
       },
@@ -97,15 +97,15 @@ export const MenuItems: Group[] = [
         subItems: [
           {
             text: "Manajemen Tugas Otomasi",
-            path: "/dashboard/otomasi-monitoring/konfigurasi-perangkat",
+            path: "/dashboard/otomasi-monitoring/manajemen-tugas-otomasi",
           },
           {
             text: "Pemantauan Sistem",
-            path: "/dashboard/otomasi-monitoring/topologi-jaringan",
+            path: "/dashboard/otomasi-monitoring/pemantauan-sistem",
           },
           {
             text: "Alerting",
-            path: "/dashboard/otomasi-monitoring/pengaturan-vlan-ip",
+            path: "/dashboard/otomasi-monitoring/alerting",
           },
         ],
       },
@@ -116,15 +116,15 @@ export const MenuItems: Group[] = [
         subItems: [
           {
             text: "Tiket Support",
-            path: "/dashboard/support-helpdesk/konfigurasi-perangkat",
+            path: "/dashboard/support-helpdesk/tiket-support",
           },
           {
             text: "Knowledge Base",
-            path: "/dashboard/support-helpdesk/topologi-jaringan",
+            path: "/dashboard/support-helpdesk/knowledge-base",
           },
           {
             text: "Feedback & Survei",
-            path: "/dashboard/support-helpdesk/pengaturan-vlan-ip",
+            path: "/dashboard/support-helpdesk/feedback-survei",
           },
         ],
       },
@@ -135,15 +135,15 @@ export const MenuItems: Group[] = [
         subItems: [
           {
             text: "Laporan Penggunaan",
-            path: "/dashboard/analytics-big-data/konfigurasi-perangkat",
+            path: "/dashboard/analytics-big-data/laporan-penggunaan",
           },
           {
             text: "Analisis Konten",
-            path: "/dashboard/analytics-big-data/topologi-jaringan",
+            path: "/dashboard/analytics-big-data/analisis-konten",
           },
           {
             text: "Analitik Prediktif",
-            path: "/dashboard/analytics-big-data/pengaturan-vlan-ip",
+            path: "/dashboard/analytics-big-data/analitik-prediktif",
           },
         ],
       },

@@ -2,28 +2,28 @@
 
 import React from "react";
 import DashboardLayout from "@/components/LayoutDashboard/layout";
-import TableDevice from "./partials/table";
 import { Button, Card } from "@mui/material";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import DialogComponent from "@/components/Dialog/dialog";
 import SnackbarSuccess from "@/components/Snackbar/snack";
-import FormDevice from "./partials/form";
 import BreadcrumbPage from "@/components/Breadcrumb/breadcrumb";
+import TableContent from "./partials/table";
+import FormContent from "./partials/form";
 
-export default function DeviceConfigurePage() {
+export default function ContentManagementPage() {
   const [modalOpenAdd, setModalOpenAdd] = React.useState(false);
   const [snackSuccess, setSnackSuccess] = React.useState(false);
 
   const breadcrumbData = [
-    { label: "Manajemen Jaringan", href: "/" },
-    { label: "Konfigurasi Perangkat", href: "/about" },
+    { label: "Middleware IPTV & OTT", href: "/" },
+    { label: "Manajemen Konten", href: "/about" },
     { label: "List" },
   ];
 
   return (
     <>
       <DashboardLayout
-        title="Konfigurasi Perangkat"
+        title="Manajemen Konten"
         breadcrumbs={<BreadcrumbPage breadcrumbData={breadcrumbData} />}
         actionButton={
           <Button
@@ -33,12 +33,12 @@ export default function DeviceConfigurePage() {
             color="primary"
             onClick={() => setModalOpenAdd(true)}
           >
-            Tambah Perangkat
+            Tambah Konten
           </Button>
         }
       >
         <Card variant="outlined">
-          <TableDevice />
+          <TableContent />
         </Card>
       </DashboardLayout>
       <DialogComponent
@@ -46,7 +46,7 @@ export default function DeviceConfigurePage() {
         width={480}
         dialogOpen={modalOpenAdd}
         dialogClose={() => setModalOpenAdd(false)}
-        title="Tambah Device"
+        title="Tambah Konten"
         labelCancel="Batal"
         labelSubmit="Simpan"
         handleModalCancel={() => setModalOpenAdd(false)}
@@ -55,7 +55,7 @@ export default function DeviceConfigurePage() {
           setSnackSuccess(true);
         }}
       >
-        <FormDevice mode="add" />
+        <FormContent mode="add" />
       </DialogComponent>
       <SnackbarSuccess
         handleSnackOpen={snackSuccess}

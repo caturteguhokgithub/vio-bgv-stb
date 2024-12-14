@@ -1,7 +1,7 @@
 "use client";
 
-import DashboardLayout from "@/components/LayoutDashboard/layout";
+import DashboardIndexPage from "./index/page";
 
 export default function DashboardPage() {
-  return <DashboardLayout>DASHBOARD PAGE</DashboardLayout>;
+  return <DashboardIndexPage />;
 }
