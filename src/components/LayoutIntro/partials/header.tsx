@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { red } from "@mui/material/colors";
+import { cfMonoton } from "@/lib/constants";
 
 const MenuItem = [
   {
@@ -129,24 +130,35 @@ export default function IntroHeader() {
                 fontSize="3rem"
                 color="white"
                 fontWeight={900}
-                letterSpacing="-0.1em"
+                letterSpacing="-0.15em"
                 lineHeight={1}
                 position="relative"
                 component="div"
                 textTransform="uppercase"
-                fontFamily="'Monoton', serif"
                 sx={{
                   textShadow: "-4px 0px 6px black",
                   userSelect: "none",
                 }}
               >
-                <Box component="span" color={red[100]}>
+                <Box
+                  component="span"
+                  color={red[100]}
+                  className={cfMonoton.className}
+                >
                   v
                 </Box>
-                <Box component="span" color={red[300]}>
+                <Box
+                  component="span"
+                  color={red[300]}
+                  className={cfMonoton.className}
+                >
                   i
                 </Box>
-                <Box component="span" color={red[600]}>
+                <Box
+                  component="span"
+                  color={red[600]}
+                  className={cfMonoton.className}
+                >
                   o
                 </Box>
                 {/* <span style={{ width: 8, display: "inline-block" }}> </span>

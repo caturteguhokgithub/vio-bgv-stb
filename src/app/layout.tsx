@@ -5,6 +5,7 @@ import iTheme from "@/themes/themes";
 import "@/lib/cssanimations/cssanimation.min.css";
 import "@/themes/styles.scss";
 import React from "react";
+import { cfPoppins } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Vio BGV STB",
@@ -32,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={cfPoppins.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={iTheme}>
             <CssBaseline />

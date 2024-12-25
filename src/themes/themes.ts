@@ -5,7 +5,7 @@ import { createTheme } from "@mui/material/styles";
 const iTheme = createTheme({
   cssVariables: true,
   typography: {
-    fontFamily: '"Inter", sans-serif',
+    // fontFamily: '"Inter", sans-serif',
     caption: {
       fontFamily: "'Open Sans', sans-serif",
     },
