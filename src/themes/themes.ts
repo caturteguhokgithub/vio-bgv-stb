@@ -31,6 +31,7 @@ const iTheme = createTheme({
           maxHeight: "100vh",
           maxWidth: "100vw",
           transition: "all 300ms ease",
+          backgroundColor: "var(--mui-palette-background-default)",
         },
       },
     },

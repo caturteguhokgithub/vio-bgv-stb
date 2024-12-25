@@ -67,7 +67,6 @@ export function SideNav({
     <Box
       // bgcolor="#F5F7F9"
       bgcolor={grey[50]}
-      // borderRight="1px solid var(--mui-palette-divider)"
       sx={{
         display: { xs: "none", lg: "flex" },
         flexDirection: "column",
@@ -92,25 +91,6 @@ export function SideNav({
     >
       <Stack direction="row" justifyContent="center">
         <Stack justifyContent="center" alignItems="flex-end" height={64}>
-          {/* {toggleCollapse && !toggleHoverCollapse ? (
-            <Typography
-              color="black"
-              fontSize={16}
-              fontWeight={600}
-              className="cssanimation fadeInTop"
-            >
-              VBS
-            </Typography>
-          ) : (
-            <Typography
-              color="black"
-              fontSize={16}
-              fontWeight={600}
-              className="cssanimation fadeInTop"
-            >
-              VIO BGV STB
-            </Typography>
-          )} */}
           <Typography
             color="black"
             fontSize={16}
@@ -123,26 +103,8 @@ export function SideNav({
           >
             {toggleCollapse && !toggleHoverCollapse ? "VBS" : "VIO BGV STB"}
           </Typography>
-          {/* <Box
-            component={Link}
-            href={paths.home}
-            sx={{ display: "inline-flex" }}
-          >
-            <Image
-              src="https://res.cloudinary.com/caturteguh/image/upload/v1727302971/unimind/logo-unimind_f1ehza.png"
-              alt="unimind"
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{
-                width: "76px",
-                height: "auto",
-              }}
-            />
-          </Box> */}
         </Stack>
       </Stack>
-      {/* <Divider sx={{ borderColor: "var(--mui-palette-divider)" }} /> */}
       <Box
         component="nav"
         overflow="auto"
@@ -167,13 +129,10 @@ export function SideNav({
                 {menu.groupName}
               </Typography>
               {menu.groupName && (
-                // <Stack spacing={1}>
                 <List component="ul" sx={{ listStyle: "none", m: 0, p: 0 }}>
                   {menu.items.map((item, itemIndex) => (
                     <React.Fragment key={item.text}>
                       <ListItem
-                        // component={Link}
-                        // href={item.subItems ? "" : item.path}
                         onClick={() =>
                           handleClick(groupIndex, itemIndex, !!item.subItems)
                         }
@@ -186,14 +145,9 @@ export function SideNav({
                           gap: 1,
                           ...(isActive(item.path) && {
                             bgcolor: alpha(blue[700], 0.15),
-                            // color: "white",
-                            // boxShadow:
                             //   "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
                             boxShadow: "rgba(0, 0, 0, 0.1) 0px 3px 8px",
                           }),
-                          // bgcolor: isActive(item.path)
-                          //   ? "white"
-                          //   : "transparent",
                           borderRadius: 1,
                           userSelect: "none",
                           cursor: "pointer",
@@ -270,10 +224,6 @@ export function SideNav({
                                       ml: 5,
                                       px: 0,
                                       py: 0.7,
-                                      // bgcolor:
-                                      //   pathname === subItem.path
-                                      //     ? alpha(blue[100], 0.4)
-                                      //     : "transparent",
                                       borderRadius: 1,
                                     }}
                                   >
@@ -284,11 +234,6 @@ export function SideNav({
                                             ? blue[700]
                                             : "black"
                                         }
-                                        // fontWeight={
-                                        //   pathname === subItem.path
-                                        //     ? 700
-                                        //     : "normal"
-                                        // }
                                         fontSize="0.83rem"
                                         lineHeight={1}
                                       >
@@ -305,7 +250,6 @@ export function SideNav({
                     </React.Fragment>
                   ))}
                 </List>
-                // </Stack>
               )}
             </Box>
           ))}

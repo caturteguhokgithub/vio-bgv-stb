@@ -18,14 +18,14 @@ export const IconEmptyState = ({ width }: { width?: number }) => {
         <path
           d="M30.71 8.04999V12.35"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M28.55 10.2H32.8601"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M79.66 35.17C71.2899 35.17 62.77 34.83 54.7999 32.61C46.9799 30.44 39.7999 26.23 33.3999 21.36C29.2099 18.19 25.3999 15.66 19.9599 16.04C14.638 16.328 9.54874 18.3153 5.43995 21.71C-1.48005 27.77 -0.440053 39 2.32995 46.86C6.48995 58.73 19.1499 67 29.9099 72.35C42.34 78.56 56 82.17 69.6899 84.24C81.6899 86.07 97.1099 87.39 107.51 79.56C117.06 72.35 119.68 55.91 117.34 44.81C116.772 41.5309 115.026 38.5721 112.43 36.49C105.72 31.58 95.7099 34.86 88.1699 35.02C85.3699 35.08 82.52 35.15 79.66 35.17Z"
@@ -38,14 +38,14 @@ export const IconEmptyState = ({ width }: { width?: number }) => {
         <path
           d="M15.2 78.5V82.8"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M13.05 80.65H17.35"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M59.5801 103.7C79.8545 103.7 96.2901 102.675 96.2901 101.41C96.2901 100.145 79.8545 99.12 59.5801 99.12C39.3057 99.12 22.8701 100.145 22.8701 101.41C22.8701 102.675 39.3057 103.7 59.5801 103.7Z"
@@ -59,15 +59,15 @@ export const IconEmptyState = ({ width }: { width?: number }) => {
           d="M89.8713 20.5639L52.2325 3.75874C51.123 3.26339 49.8221 3.76122 49.3267 4.87068L37.3976 31.5885C36.9022 32.698 37.4001 33.999 38.5095 34.4943L76.1483 51.2994C77.2578 51.7948 78.5587 51.297 79.0541 50.1875L90.9832 23.4696C91.4786 22.3602 90.9807 21.0592 89.8713 20.5639Z"
           fill="white"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M57.75 25.74C58.7407 24.3499 60.1816 23.345 61.8285 22.8957C63.4754 22.4464 65.2269 22.5803 66.7864 23.2747C68.3458 23.9691 69.6172 25.1813 70.3852 26.7058C71.1531 28.2304 71.3703 29.9736 71 31.64"
           stroke={grey[400]}
           stroke-width="0.68"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M75.75 24.23C76.3188 24.23 76.78 23.7688 76.78 23.2C76.78 22.6311 76.3188 22.17 75.75 22.17C75.1811 22.17 74.72 22.6311 74.72 23.2C74.72 23.7688 75.1811 24.23 75.75 24.23Z"
@@ -81,21 +81,21 @@ export const IconEmptyState = ({ width }: { width?: number }) => {
           d="M88.81 76.86H25.09C24.3147 76.8574 23.572 76.5475 23.0247 75.9983C22.4773 75.4491 22.17 74.7054 22.17 73.93V29C22.1607 28.6102 22.2293 28.2225 22.3717 27.8596C22.5142 27.4966 22.7276 27.1657 22.9996 26.8863C23.2715 26.607 23.5965 26.3846 23.9554 26.2324C24.3144 26.0802 24.7001 26.0012 25.09 26H48.3C48.8386 26.002 49.3662 26.1524 49.8249 26.4346C50.2836 26.7169 50.6556 27.1201 50.9 27.6L54.21 34.08C54.4536 34.5606 54.8254 34.9645 55.2843 35.2468C55.7432 35.5292 56.2712 35.6791 56.81 35.68H88.81C89.5845 35.68 90.3272 35.9876 90.8748 36.5352C91.4224 37.0829 91.73 37.8256 91.73 38.6V73.93C91.73 74.7054 91.4227 75.4491 90.8754 75.9983C90.3281 76.5475 89.5854 76.8574 88.81 76.86Z"
           fill="white"
           stroke={blue[100]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M78.9999 37.21C75.3188 37.208 71.7197 38.2978 68.658 40.3415C65.5963 42.3852 63.2094 45.291 61.7994 48.6914C60.3893 52.0917 60.0193 55.8339 60.7363 59.4445C61.4532 63.0552 63.2248 66.3721 65.8271 68.9757C68.4294 71.5794 71.7453 73.3528 75.3556 74.0717C78.9658 74.7906 82.7082 74.4226 86.1093 73.0144C89.5104 71.6061 92.4175 69.2208 94.4628 66.1602C96.5082 63.0996 97.5999 59.5012 97.5999 55.82C97.5999 50.8861 95.6406 46.1541 92.1527 42.6643C88.6648 39.1745 83.9338 37.2127 78.9999 37.21Z"
           fill="white"
           stroke="#BABABA"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M92.24 69.32L97.2 74.28"
           stroke="#BABABA"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M96.6393 71.8701L95.0984 73.4821C94.4076 74.2046 94.4334 75.3504 95.156 76.0411L108.529 88.8248C109.251 89.5155 110.397 89.4897 111.088 88.7672L112.629 87.1552C113.319 86.4326 113.294 85.2869 112.571 84.5961L99.1984 71.8125C98.4758 71.1217 97.3301 71.1475 96.6393 71.8701Z"
@@ -104,14 +104,14 @@ export const IconEmptyState = ({ width }: { width?: number }) => {
         <path
           d="M106.54 1.21002V5.52002"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M104.38 3.37H108.69"
           stroke={grey[400]}
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </SvgIcon>
