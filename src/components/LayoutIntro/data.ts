@@ -56,23 +56,66 @@ export const dataInput = [
   },
 ];
 
+export const dataSetting = [
+  {
+    value: "1",
+    icon: "mdi:wifi",
+    title: "Network & Internet",
+    desc: "wifiID",
+  },
+  {
+    value: "2",
+    icon: "mdi:tooltip-image",
+    title: "Picture",
+  },
+  {
+    value: "3",
+    icon: "mdi:volume-high",
+    title: "Sound",
+  },
+  {
+    value: "4",
+    icon: "mdi:tv-classic",
+    title: "TV",
+  },
+  {
+    value: "5",
+    icon: "mdi:television-shimmer",
+    title: "Device Preferences",
+  },
+  {
+    value: "6",
+    icon: "mdi:account-settings-variant",
+    title: "Account & Sign In",
+    desc: "2 accounts",
+  },
+  {
+    value: "7",
+    icon: "mdi:remote",
+    title: "Remote & Accessories",
+  },
+];
+
 export const dataAccount = [
   {
     value: "1",
     icon: "WR",
     title: "Woodward Richard",
     desc: "richard.woodward@polland.com",
+    href: "/customer",
   },
   {
     value: "2",
     icon: "AC",
     title: "Angelia Castaneda",
     desc: "angelia.castaneda@netherland.com",
+    href: "/customer",
   },
   {
     value: "3",
     icon: "DS",
     title: "Dillard Santos",
     desc: "s.dillard@spain.com",
+    href: "/customer",
   },
 ];

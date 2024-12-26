@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cfPoppins.className}>
+      <body className={cfPoppins.className} >
         <AppRouterCacheProvider>
           <ThemeProvider theme={iTheme}>
             <CssBaseline />

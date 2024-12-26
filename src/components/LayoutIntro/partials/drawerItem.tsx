@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import {
+  alpha,
   Avatar,
   Box,
   IconButton,
@@ -9,9 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import Iconify from "@/components/Icon/iconify";
-import { blue, grey } from "@mui/material/colors";
+import { blue, grey, red } from "@mui/material/colors";
 import { AnimatePresence, motion } from "motion/react";
-import { dataAccount, dataInput, dataNotification } from "../data";
+import { dataAccount, dataInput, dataNotification, dataSetting } from "../data";
 
 const ToggleBtnItem = ({
   title,
@@ -21,6 +22,8 @@ const ToggleBtnItem = ({
   menu,
   active,
   value,
+  bgcolor,
+  href,
 }: {
   title: string;
   desc?: string;
@@ -29,6 +32,8 @@ const ToggleBtnItem = ({
   menu?: string;
   active?: boolean;
   value?: string | any;
+  bgcolor?: string;
+  href?: string;
 }) => {
   const [itemRemove, setItemRemove] = React.useState(true);
   const [itemActive, setItemActive] = React.useState(false);
@@ -66,9 +71,21 @@ const ToggleBtnItem = ({
           <ToggleButton
             component="div"
             value={value}
-            sx={{ width: "100%", p: 0, textTransform: "none" }}
+            sx={{
+              width: "100%",
+              p: 0,
+              textTransform: "none",
+              bgcolor: bgcolor,
+              transition: "all 300ms ease",
+
+              "&:hover": {
+                bgcolor: `${bgcolor}BF`,
+              },
+            }}
           >
             <Stack
+              component="a"
+              href={href}
               width="100%"
               px={4}
               py={3}
@@ -206,9 +223,9 @@ export default function DrawerItem({
           ))}
         </Fragment>
       )}
-      {menu == "account" && (
+      {menu == "setting" && (
         <Fragment>
-          {dataAccount.map((item, index) => (
+          {dataSetting.map((item, index) => (
             <ToggleButtonGroup
               key={index}
               value={itemInput}
@@ -225,10 +242,56 @@ export default function DrawerItem({
                 icon={item.icon}
                 title={item.title}
                 desc={item.desc}
-                menu="account"
               />
             </ToggleButtonGroup>
           ))}
+        </Fragment>
+      )}
+      {menu == "account" && (
+        <Fragment>
+          <Stack
+            direction="column"
+            justifyContent="space-between"
+            height="100%"
+          >
+            <Stack direction="column">
+              {dataAccount.map((item, index) => (
+                <ToggleButtonGroup
+                  key={index}
+                  value={itemInput}
+                  exclusive
+                  onChange={handleItemInput}
+                  sx={{
+                    ".MuiToggleButton-root.Mui-selected": {
+                      bgcolor: blue[600],
+                    },
+                  }}
+                >
+                  <ToggleBtnItem
+                    value={item.value}
+                    icon={item.icon}
+                    title={item.title}
+                    desc={item.desc}
+                    menu="account"
+                    href={item.href}
+                  />
+                </ToggleButtonGroup>
+              ))}
+            </Stack>
+            <Stack direction="column">
+              <ToggleBtnItem
+                icon="line-md:plus-circle"
+                title="Add Account"
+                desc="Login to different account"
+              />
+              <ToggleBtnItem
+                bgcolor={red[800]}
+                icon="line-md:log-out"
+                title="Logout"
+                desc="Logout to move apps"
+              />
+            </Stack>
+          </Stack>
         </Fragment>
       )}
     </Fragment>

@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { red } from "@mui/material/colors";
 import { cfMonoton } from "@/lib/constants";
+import CompanyLogo from "@/components/CompanyLogo/page";
 
 const MenuItem = [
   {
@@ -16,15 +17,15 @@ const MenuItem = [
   },
   {
     label: "Shop",
-    path: "/shop",
+    path: "/intro/shop",
   },
   {
     label: "Apps",
-    path: "/apps",
+    path: "/intro/apps",
   },
   {
     label: "My List",
-    path: "/list",
+    path: "/intro/list",
   },
 ];
 
@@ -48,6 +49,7 @@ const NavLink = ({
         }}
       >
         <Typography
+          component="span"
           color="inherit"
           fontSize="1.2rem"
           fontWeight={isActive(href) ? 700 : 500}
@@ -75,6 +77,7 @@ const NavLink = ({
 export default function IntroHeader() {
   const [openNotif, setOpenNotif] = React.useState(false);
   const [openInput, setOpenInput] = React.useState(false);
+  const [openSetting, setOpenSetting] = React.useState(false);
   const [openAccount, setOpenAccount] = React.useState(false);
 
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -126,50 +129,9 @@ export default function IntroHeader() {
             alignItems="center"
           >
             <Stack direction="row" alignItems="center" gap={8}>
-              <Typography
-                fontSize="3rem"
-                color="white"
-                fontWeight={900}
-                letterSpacing="-0.15em"
-                lineHeight={1}
-                position="relative"
-                component="div"
-                textTransform="uppercase"
-                sx={{
-                  textShadow: "-4px 0px 6px black",
-                  userSelect: "none",
-                }}
-              >
-                <Box
-                  component="span"
-                  color={red[100]}
-                  className={cfMonoton.className}
-                >
-                  v
-                </Box>
-                <Box
-                  component="span"
-                  color={red[300]}
-                  className={cfMonoton.className}
-                >
-                  i
-                </Box>
-                <Box
-                  component="span"
-                  color={red[600]}
-                  className={cfMonoton.className}
-                >
-                  o
-                </Box>
-                {/* <span style={{ width: 8, display: "inline-block" }}> </span>
-              <span>b</span>
-              <span>g</span>
-              <span>v</span>
-              <span style={{ width: 8, display: "inline-block" }}> </span>
-              <span>s</span>
-              <span>t</span>
-              <span>b</span> */}
-              </Typography>
+              <Link href="/">
+                <CompanyLogo dark />
+              </Link>
               <Stack direction="row" alignItems="center" gap={4}>
                 <Stack flexDirection="row" gap={3}>
                   {MenuItem.map(({ label, path }, i) => (
@@ -187,7 +149,7 @@ export default function IntroHeader() {
               <IconButton onClick={() => setOpenInput(true)}>
                 <Icon icon="mdi:login-variant" color="white" height={24} />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={() => setOpenSetting(true)}>
                 <Icon icon="mdi:cog-outline" color="white" height={24} />
               </IconButton>
               <IconButton onClick={() => setOpenAccount(true)}>
@@ -204,6 +166,9 @@ export default function IntroHeader() {
       </DrawerMenu>
       <DrawerMenu open={openInput} onclose={() => setOpenInput(false)}>
         <DrawerItem title="Input Source" menu="input" />
+      </DrawerMenu>
+      <DrawerMenu open={openSetting} onclose={() => setOpenSetting(false)}>
+        <DrawerItem title="Settings" menu="setting" />
       </DrawerMenu>
       <DrawerMenu open={openAccount} onclose={() => setOpenAccount(false)}>
         <DrawerItem title="Account" menu="account" />
