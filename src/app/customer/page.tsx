@@ -1,13 +1,8 @@
 "use client";
 
 import React from "react";
-import { Stack } from "@mui/material";
-import LayoutCustomer from "@/components/LayoutCustomer/page";
+import Overview from "./overview/page";
 
-export default function Overview() {
-  return (
-    <LayoutCustomer title="Overview">
-      <Stack>Overview</Stack>
-    </LayoutCustomer>
-  );
+export default function CustomerHome() {
+  return <Overview />;
 }

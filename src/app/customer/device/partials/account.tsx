@@ -16,12 +16,14 @@ import Iconify from "@/components/Icon/iconify";
 
 export default function AccountDevice({
   device,
+  deviceName,
   current,
   userIcon,
   username,
   dateTime,
 }: {
   device?: string;
+  deviceName?: string;
   current?: boolean;
   userIcon?: string;
   username?: string;
@@ -49,6 +51,7 @@ export default function AccountDevice({
               alignItems="center"
               justifyContent="space-between"
               width="100%"
+              minHeight={30.75}
             >
               <Stack direction="row" gap={1} alignItems="center">
                 <Iconify
@@ -56,17 +59,18 @@ export default function AccountDevice({
                     device == "tv"
                       ? "mdi:television"
                       : device == "browser"
-                      ? "mdi:laptop-account"
+                      ? "mdi:laptop"
                       : "mdi:cellphone-android"
                   }
                   size={20}
                 />
                 <Typography fontSize="1rem" fontWeight={600}>
-                  {device}
+                  {deviceName}
                 </Typography>
               </Stack>
               {current ? (
                 <Chip
+                  size="small"
                   variant="outlined"
                   label="Current Device"
                   color="primary"
@@ -94,7 +98,11 @@ export default function AccountDevice({
                   </>
                 ) : (
                   <>
-                    <Iconify name="mdi:user" size={24} color={grey[700]} />
+                    <Iconify
+                      name="mdi:account-alert-outline"
+                      size={24}
+                      color={grey[700]}
+                    />
                     <Typography fontSize="1rem" color={grey[700]}>
                       No profile to show
                     </Typography>
@@ -102,7 +110,11 @@ export default function AccountDevice({
                 )}
               </Stack>
               <Stack direction="row" gap={1.5} alignItems="center">
-                <Iconify name="mdi:clock-time-eight-outline" size={24} />
+                <Iconify
+                  name="mdi:clock-time-eight-outline"
+                  size={24}
+                  color={grey[700]}
+                />
                 <Typography fontSize="1rem" color={grey[700]}>
                   {dateTime}
                 </Typography>

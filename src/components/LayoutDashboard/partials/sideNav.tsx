@@ -16,6 +16,7 @@ import { blue, grey } from "@mui/material/colors";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
 import { MenuItems } from "./menuItems";
+import CompanyLogo from "@/components/CompanyLogo/page";
 
 export function SideNav({
   toggleCollapse,
@@ -91,6 +92,15 @@ export function SideNav({
     >
       <Stack direction="row" justifyContent="center">
         <Stack justifyContent="center" alignItems="flex-end" height={64}>
+          {/* <Box
+            className={`cssanimation ${
+              toggleCollapse && !toggleHoverCollapse
+                ? "blurInTop"
+                : "blurInBottom"
+            }`}
+          >
+            <CompanyLogo />
+          </Box> */}
           <Typography
             color="black"
             fontSize={16}

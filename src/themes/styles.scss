@@ -85,3 +85,20 @@ a:active {
     opacity: 0.5;
   }
 }
+
+.btn-grad-plan {
+  background-image: linear-gradient(to right, red 0%, #ff6a00 51%, red 100%);
+
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+
+  &:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+  }
+}

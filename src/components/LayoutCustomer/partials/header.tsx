@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Avatar,
+  Box,
   Container,
   IconButton,
   Stack,
@@ -14,7 +15,9 @@ export default function HeaderCustomer() {
     <Stack bgcolor="white" borderBottom={`1px solid ${grey[300]}`}>
       <Container>
         <Stack direction="row" justifyContent="space-between" py={2}>
-          <CompanyLogo />
+          <Box className="blurInBottom">
+            <CompanyLogo />
+          </Box>
           <IconButton>
             <Avatar sx={{ width: 28, height: 28, bgcolor: "red" }}>
               <Typography fontSize="0.7rem" color="white">

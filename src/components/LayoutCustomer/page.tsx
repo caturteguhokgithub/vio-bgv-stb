@@ -24,14 +24,14 @@ export default function LayoutCustomer({
         }}
       />
       <HeaderCustomer />
-      <Stack py={5}>
+      <Stack pt={5} pb={2}>
         <Container>
           <Grid container spacing={6}>
             <Grid size={2.5}>
               <SidemenuCustomer />
             </Grid>
             <Grid size={9.5}>
-              <Stack direction="column" minHeight="calc(100vh - 164px)" gap={2}>
+              <Stack direction="column" minHeight="calc(100vh - 140px)" gap={2}>
                 <Typography fontSize="1.5rem" fontWeight={600}>
                   {title}
                 </Typography>
