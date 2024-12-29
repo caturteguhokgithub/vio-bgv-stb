@@ -4,6 +4,8 @@ import { Box, Stack, Typography } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { blue, green, grey, orange, red, yellow } from "@mui/material/colors";
+import useBreakpoints from "@/themes/breakpoints";
+import { SectionTitle } from "@/components/SectionTitle";
 
 const dataFavorite = [
   {
@@ -63,7 +65,7 @@ export const CardItem = ({
       justifyContent="center"
       alignItems="center"
       width="100%"
-      height="120px"
+      height="16vh"
       bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
@@ -72,7 +74,7 @@ export const CardItem = ({
         transform: isActive ? "scale(1.2)" : "none",
       }}
     >
-      <Icon icon={icon} height={60} color={iconcolor || "white"} />
+      <Icon icon={icon} height="6vh" color={iconcolor || "white"} />
     </Stack>
   );
 };
@@ -80,11 +82,13 @@ export const CardItem = ({
 export default function SectionFavorite() {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
+  const { onlySmallScreen, onlyLargeScreen } = useBreakpoints();
+
   const [favoriteRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     mode: "free-snap",
     slides: {
-      perView: 6,
+      perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 6,
       spacing: 15,
     },
   });
@@ -95,9 +99,7 @@ export default function SectionFavorite() {
 
   return (
     <Stack gap={2}>
-      <Typography color="white" fontSize="1.3rem" fontWeight={600}>
-        Favorite Apps
-      </Typography>
+      <SectionTitle label="Favorite Apps" />
       <Box ref={favoriteRef} className="keen-slider">
         {dataFavorite.map((item, index) => (
           <Box

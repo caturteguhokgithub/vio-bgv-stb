@@ -16,7 +16,6 @@ import { blue, grey } from "@mui/material/colors";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
 import { MenuItems } from "./menuItems";
-import CompanyLogo from "@/components/CompanyLogo/page";
 
 export function SideNav({
   toggleCollapse,

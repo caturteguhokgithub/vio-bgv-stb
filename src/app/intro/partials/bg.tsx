@@ -4,6 +4,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
+import useBreakpoints from "@/themes/breakpoints";
 
 const images = [
   {
@@ -88,6 +89,8 @@ export default function IntroBgTitle() {
       },
     ]
   );
+
+  const { onlySmallScreen } = useBreakpoints();
 
   return (
     <>
@@ -177,7 +180,12 @@ export default function IntroBgTitle() {
           </Box>
         ))}
       </Box>
-      <Box ref={sliderRef} position="relative" zIndex={4} mt="8vh">
+      <Box
+        ref={sliderRef}
+        position="relative"
+        zIndex={4}
+        mt={onlySmallScreen ? "6vh" : "8vh"}
+      >
         {images.map((src, idx) => (
           <Fragment key={idx}>
             {activeSlide === idx && (
@@ -197,7 +205,7 @@ export default function IntroBgTitle() {
                     <Typography
                       color="white"
                       component="h2"
-                      fontSize="2.5rem"
+                      fontSize={onlySmallScreen ? "1.5rem" : "2.5rem"}
                       fontWeight={700}
                     >
                       {src.title}
@@ -214,8 +222,8 @@ export default function IntroBgTitle() {
                     <Typography
                       color="white"
                       component="p"
-                      fontSize="1.3rem"
-                      maxWidth="50vw"
+                      fontSize={onlySmallScreen ? "1rem" : "1.3rem"}
+                      maxWidth={onlySmallScreen ? "100vw" : "50vw"}
                     >
                       {src.desc}
                     </Typography>

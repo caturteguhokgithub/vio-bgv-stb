@@ -13,6 +13,8 @@ import {
   teal,
   yellow,
 } from "@mui/material/colors";
+import useBreakpoints from "@/themes/breakpoints";
+import { SectionTitle } from "@/components/SectionTitle";
 
 const dataFavorite = [
   {
@@ -73,7 +75,7 @@ export const CardItem = ({
       justifyContent="center"
       alignItems="center"
       width="100%"
-      height="180px"
+      height="18vh"
       bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
@@ -82,7 +84,7 @@ export const CardItem = ({
         transform: isActive ? "scale(1.2)" : "none",
       }}
     >
-      <Icon icon={icon} height={150} color={iconcolor || "white"} />
+      <Icon icon={icon} height="12vh" color={iconcolor || "white"} />
     </Stack>
   );
 };
@@ -90,11 +92,13 @@ export const CardItem = ({
 export default function SectionLiveTv() {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
+  const { onlySmallScreen, onlyLargeScreen } = useBreakpoints();
+
   const [favoriteRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     mode: "free-snap",
     slides: {
-      perView: 4,
+      perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 4,
       spacing: 15,
     },
   });
@@ -105,9 +109,7 @@ export default function SectionLiveTv() {
 
   return (
     <Stack gap={2}>
-      <Typography color="white" fontSize="1.3rem" fontWeight={600}>
-        Live TV Channel
-      </Typography>
+      <SectionTitle label="Live TV Channel" />
       <Box ref={favoriteRef} className="keen-slider">
         {dataFavorite.map((item, index) => (
           <Box

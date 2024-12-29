@@ -1,84 +1,29 @@
 import React, { Fragment } from "react";
 import { Icon } from "@iconify/react";
-import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import DrawerMenu from "./drawerMenu";
 import DrawerItem from "./drawerItem";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { red } from "@mui/material/colors";
-import { cfMonoton } from "@/lib/constants";
 import CompanyLogo from "@/components/CompanyLogo/page";
-
-const MenuItem = [
-  {
-    label: "Home",
-    path: "/",
-  },
-  {
-    label: "Shop",
-    path: "/intro/shop",
-  },
-  {
-    label: "Apps",
-    path: "/intro/apps",
-  },
-  {
-    label: "My List",
-    path: "/intro/list",
-  },
-];
-
-const NavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => {
-  const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
-
-  return (
-    <Box component={Link} href={href}>
-      <motion.span
-        transition={{ duration: 0.5 }}
-        style={{
-          color: "white",
-          position: "relative",
-        }}
-      >
-        <Typography
-          component="span"
-          color="inherit"
-          fontSize="1.2rem"
-          fontWeight={isActive(href) ? 700 : 500}
-        >
-          {children}
-        </Typography>
-        {isActive(href) && (
-          <motion.span
-            layoutId="underline"
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "2px",
-              bottom: -4,
-              display: "block",
-              backgroundColor: "white",
-            }}
-          />
-        )}
-      </motion.span>
-    </Box>
-  );
-};
+import useBreakpoints from "@/themes/breakpoints";
+import { MainMenu, MenuItems } from "./mainMenu";
+import { grey } from "@mui/material/colors";
 
 export default function IntroHeader() {
   const [openNotif, setOpenNotif] = React.useState(false);
   const [openInput, setOpenInput] = React.useState(false);
   const [openSetting, setOpenSetting] = React.useState(false);
   const [openAccount, setOpenAccount] = React.useState(false);
+  const [openSearch, setOpenSearch] = React.useState(false);
 
   const ref = React.useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll();
@@ -103,14 +48,16 @@ export default function IntroHeader() {
     };
   }, []);
 
+  const { onlySmallScreen, onlyMediumScreen } = useBreakpoints();
+
   return (
     <Fragment>
       <motion.header
         ref={ref}
         style={{
-          marginTop: "calc(7 * 8px)",
-          paddingInline: conditionalStyle ? 24 : 80,
-          paddingBlock: conditionalStyle ? 24 : "unset",
+          marginTop: onlySmallScreen ? 24 : "calc(7 * 8px)",
+          paddingInline: conditionalStyle ? 24 : onlyMediumScreen ? 24 : 80,
+          paddingBlock: conditionalStyle ? 16 : "unset",
           position: "sticky",
           top: 0,
           zIndex: 5,
@@ -132,26 +79,43 @@ export default function IntroHeader() {
               <Link href="/">
                 <CompanyLogo dark />
               </Link>
-              <Stack direction="row" alignItems="center" gap={4}>
-                <Stack flexDirection="row" gap={3}>
-                  {MenuItem.map(({ label, path }, i) => (
-                    <NavLink key={i} href={path}>
-                      {label}
-                    </NavLink>
-                  ))}
+              {!onlyMediumScreen && (
+                <Stack direction="row" alignItems="center" gap={4}>
+                  <Stack flexDirection="row" gap={3}>
+                    {MenuItems.map(({ label, path }, i) => (
+                      <MainMenu key={i} href={path}>
+                        {label}
+                      </MainMenu>
+                    ))}
+                  </Stack>
                 </Stack>
-              </Stack>
+              )}
             </Stack>
-            <Stack direction="row" alignItems="center" gap={3}>
-              <IconButton onClick={() => setOpenNotif(true)}>
-                <Icon icon="mdi:bell-badge-outline" color="white" height={24} />
+            <Stack
+              direction="row"
+              alignItems="center"
+              gap={onlyMediumScreen ? 1 : 3}
+            >
+              <IconButton onClick={() => setOpenSearch(true)}>
+                <Icon icon="mdi:magnify" color="white" height={24} />
               </IconButton>
-              <IconButton onClick={() => setOpenInput(true)}>
-                <Icon icon="mdi:login-variant" color="white" height={24} />
-              </IconButton>
-              <IconButton onClick={() => setOpenSetting(true)}>
-                <Icon icon="mdi:cog-outline" color="white" height={24} />
-              </IconButton>
+              {!onlyMediumScreen && (
+                <Fragment>
+                  <IconButton onClick={() => setOpenNotif(true)}>
+                    <Icon
+                      icon="mdi:bell-badge-outline"
+                      color="white"
+                      height={24}
+                    />
+                  </IconButton>
+                  <IconButton onClick={() => setOpenInput(true)}>
+                    <Icon icon="mdi:login-variant" color="white" height={24} />
+                  </IconButton>
+                  <IconButton onClick={() => setOpenSetting(true)}>
+                    <Icon icon="mdi:cog-outline" color="white" height={24} />
+                  </IconButton>
+                </Fragment>
+              )}
               <IconButton onClick={() => setOpenAccount(true)}>
                 <Avatar sx={{ width: 24, height: 24, bgcolor: "white" }}>
                   <Typography fontSize="0.7rem">CT</Typography>
@@ -161,6 +125,44 @@ export default function IntroHeader() {
           </Stack>
         </Box>
       </motion.header>
+      <DrawerMenu
+        position="top"
+        open={openSearch}
+        onclose={() => setOpenSearch(false)}
+      >
+        <Stack p={3} direction="row" gap={3}>
+          {!onlyMediumScreen && <CompanyLogo dark />}
+          <TextField
+            fullWidth
+            slotProps={{
+              inputLabel: {
+                shrink: true,
+              },
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Icon icon="mdi:magnify" color="white" height={28} />
+                  </InputAdornment>
+                ),
+              },
+            }}
+            sx={{
+              ".MuiInputBase-root": {
+                borderRadius: 2,
+                "&:hover": {
+                  outline: `1px solid ${grey[400]}`,
+                },
+              },
+              ".MuiInputBase-input": {
+                color: "white",
+              },
+              fieldset: {
+                borderColor: grey[700],
+              },
+            }}
+          />
+        </Stack>
+      </DrawerMenu>
       <DrawerMenu open={openNotif} onclose={() => setOpenNotif(false)}>
         <DrawerItem title="Notifications" menu="notification" />
       </DrawerMenu>
@@ -170,8 +172,16 @@ export default function IntroHeader() {
       <DrawerMenu open={openSetting} onclose={() => setOpenSetting(false)}>
         <DrawerItem title="Settings" menu="setting" />
       </DrawerMenu>
-      <DrawerMenu open={openAccount} onclose={() => setOpenAccount(false)}>
-        <DrawerItem title="Account" menu="account" />
+      <DrawerMenu
+        mobileView={onlyMediumScreen}
+        open={openAccount}
+        onclose={() => setOpenAccount(false)}
+      >
+        {onlyMediumScreen ? (
+          <DrawerItem menu="mobile" />
+        ) : (
+          <DrawerItem title="Account" menu="account" />
+        )}
       </DrawerMenu>
     </Fragment>
   );

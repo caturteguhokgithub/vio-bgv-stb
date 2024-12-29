@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import Iconify from "@/components/Icon/iconify";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { blue, red } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
+import Link from "next/link";
 
 const MenuItem = [
   {
@@ -58,7 +59,6 @@ const NavLink = ({
       <motion.span
         transition={{ duration: 0.5 }}
         style={{
-          position: "relative",
           lineHeight: 1,
           display: "inline-flex",
           alignItems: "center",
@@ -78,7 +78,6 @@ const NavLink = ({
             color="inherit"
             fontSize="1rem"
             fontWeight={isActive(href) ? 600 : 500}
-            position="relative"
             zIndex={1}
             lineHeight={1}
           >
@@ -89,16 +88,18 @@ const NavLink = ({
       {isActive(href) && (
         <motion.span
           layoutId="underline"
-          initial={{ opacity: 0.5, width: 0 }}
-          animate={{ opacity: 1, width: "100%" }}
-          exit={{ opacity: 0.5, width: 0 }}
+          // initial={{ opacity: 0.5, width: 0 }}
+          // animate={{ opacity: 1, width: "100%", transition: { duration: 0.5 } }}
+          // exit={{ opacity: 0.5, width: 0, transition: { duration: 0.5 } }}
+          initial={false}
+          layout
           style={{
-            backgroundColor: red[100],
+            background:
+              "linear-gradient(90deg, rgba(255,205,210,1) 0%, rgba(255,255,255,0) 100%)",
             borderRadius: 8,
             position: "absolute",
             width: "100%",
             height: "42px",
-            top: 0,
             left: 0,
             display: "block",
             zIndex: 0,
