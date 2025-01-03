@@ -13,6 +13,7 @@ import {
 import Grid from "@mui/material/Grid2";
 import { grey } from "@mui/material/colors";
 import Iconify from "@/components/Icon/iconify";
+import useBreakpoints from "@/themes/breakpoints";
 
 export default function AccountDevice({
   device,
@@ -29,8 +30,10 @@ export default function AccountDevice({
   username?: string;
   dateTime?: string;
 }) {
+  const { onlyMediumScreen } = useBreakpoints();
+
   return (
-    <Grid size={6}>
+    <Grid size={onlyMediumScreen ? 12 : 6}>
       <Stack>
         <Card
           variant="outlined"

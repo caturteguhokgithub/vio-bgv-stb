@@ -1,14 +1,6 @@
 import React, { Fragment } from "react";
 import { Icon } from "@iconify/react";
-import {
-  Avatar,
-  Box,
-  IconButton,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import DrawerMenu from "./drawerMenu";
 import DrawerItem from "./drawerItem";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -16,7 +8,7 @@ import Link from "next/link";
 import CompanyLogo from "@/components/CompanyLogo/page";
 import useBreakpoints from "@/themes/breakpoints";
 import { MainMenu, MenuItems } from "./mainMenu";
-import { grey } from "@mui/material/colors";
+import SearchBox from "./search";
 
 export default function IntroHeader() {
   const [openNotif, setOpenNotif] = React.useState(false);
@@ -130,38 +122,7 @@ export default function IntroHeader() {
         open={openSearch}
         onclose={() => setOpenSearch(false)}
       >
-        <Stack p={3} direction="row" gap={3}>
-          {!onlyMediumScreen && <CompanyLogo dark />}
-          <TextField
-            fullWidth
-            slotProps={{
-              inputLabel: {
-                shrink: true,
-              },
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Icon icon="mdi:magnify" color="white" height={28} />
-                  </InputAdornment>
-                ),
-              },
-            }}
-            sx={{
-              ".MuiInputBase-root": {
-                borderRadius: 2,
-                "&:hover": {
-                  outline: `1px solid ${grey[400]}`,
-                },
-              },
-              ".MuiInputBase-input": {
-                color: "white",
-              },
-              fieldset: {
-                borderColor: grey[700],
-              },
-            }}
-          />
-        </Stack>
+        <SearchBox openSearch={openSearch} setOpenSearch={setOpenSearch} />
       </DrawerMenu>
       <DrawerMenu open={openNotif} onclose={() => setOpenNotif(false)}>
         <DrawerItem title="Notifications" menu="notification" />

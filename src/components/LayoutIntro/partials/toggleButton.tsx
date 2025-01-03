@@ -10,6 +10,7 @@ import Iconify from "@/components/Icon/iconify";
 import { grey } from "@mui/material/colors";
 import { AnimatePresence, motion } from "motion/react";
 import useBreakpoints from "@/themes/breakpoints";
+import Link from "next/link";
 
 export const ToggleBtnItem = ({
   title,
@@ -20,7 +21,7 @@ export const ToggleBtnItem = ({
   active,
   value,
   bgcolor,
-  href,
+  href = "",
 }: {
   title: string;
   desc?: string;
@@ -82,66 +83,67 @@ export const ToggleBtnItem = ({
               },
             }}
           >
-            <Stack
-              component="a"
-              href={href}
-              width="100%"
-              px={onlyMediumScreen ? 2 : 4}
-              py={onlyMediumScreen ? 2 : 3}
-              direction="row"
-              alignItems="center"
-              gap={2}
-              onClick={handleClick}
-            >
-              {menu == "account" ? (
-                <Avatar sx={{ width: 24, height: 24, bgcolor: "white" }}>
-                  <Typography fontSize="0.7rem">{icon}</Typography>
-                </Avatar>
-              ) : (
-                <Fragment>
-                  {icon !== "" && (
-                    <Iconify
-                      name={icon || "line-md:email"}
-                      color="white"
-                      size={onlyMediumScreen ? 24 : 32}
-                    />
-                  )}
-                </Fragment>
-              )}
+            <Link href={href} style={{ width: "100%", display: "block" }}>
               <Stack
-                color="white"
-                maxWidth={onlyMediumScreen ? 200 : 300}
-                flexGrow={1}
                 component="span"
+                width="100%"
+                px={onlyMediumScreen ? 2 : 4}
+                py={onlyMediumScreen ? 2 : 3}
+                direction="row"
+                alignItems="center"
+                gap={2}
+                onClick={handleClick}
               >
-                <Typography component="h3" fontSize="1rem" fontWeight={600}>
-                  {title}
-                </Typography>
-                <Typography
-                  component="p"
-                  fontSize="0.8rem"
-                  whiteSpace="nowrap"
-                  maxWidth={200}
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                  color={grey[300]}
-                >
-                  {desc}
-                </Typography>
-              </Stack>
-              {hasRemove && (
-                <IconButton onClick={handleRemoveItem}>
-                  <Iconify name="line-md:close" color="white" size={16} />
-                </IconButton>
-              )}
-              {menu == "input" && active && (
-                <Iconify
-                  name="line-md:circle-filled-to-confirm-circle-filled-transition"
+                {menu == "account" ? (
+                  <Avatar sx={{ width: 24, height: 24, bgcolor: "white" }}>
+                    <Typography fontSize="0.7rem">{icon}</Typography>
+                  </Avatar>
+                ) : (
+                  <Fragment>
+                    {icon !== "" && (
+                      <Iconify
+                        name={icon || "line-md:email"}
+                        color="white"
+                        size={onlyMediumScreen ? 24 : 32}
+                      />
+                    )}
+                  </Fragment>
+                )}
+                <Stack
                   color="white"
-                  size={28}
-                />
-              )}
-            </Stack>
+                  maxWidth={onlyMediumScreen ? 200 : 300}
+                  flexGrow={1}
+                  component="span"
+                >
+                  <Typography component="h3" fontSize="1rem" fontWeight={600}>
+                    {title}
+                  </Typography>
+                  <Typography
+                    component="p"
+                    fontSize="0.8rem"
+                    whiteSpace="nowrap"
+                    maxWidth={200}
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                    color={grey[300]}
+                  >
+                    {desc}
+                  </Typography>
+                </Stack>
+                {hasRemove && (
+                  <IconButton onClick={handleRemoveItem}>
+                    <Iconify name="line-md:close" color="white" size={16} />
+                  </IconButton>
+                )}
+                {menu == "input" && active && (
+                  <Iconify
+                    name="line-md:circle-filled-to-confirm-circle-filled-transition"
+                    color="white"
+                    size={28}
+                  />
+                )}
+              </Stack>
+            </Link>
           </ToggleButton>
         </motion.div>
       )}

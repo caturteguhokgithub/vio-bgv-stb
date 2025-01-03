@@ -16,44 +16,60 @@ import {
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
 
-const dataFavorite = [
+export interface FavType {
+  icon?: string | any;
+  iconColor?: string;
+  bgColor?: string;
+  title?: string | any;
+}
+
+export const dataFavorite: FavType[] = [
   {
     icon: "cbi:okko-tv",
     bgColor: "#7a12ca",
+    title: "okko tv",
   },
   {
     icon: "cbi:zdftivi",
     iconColor: orange[600],
+    title: "zdf tv",
   },
   {
     icon: "cbi:metv",
     iconColor: grey[900],
     bgColor: yellow[600],
+    title: "me tv",
   },
   {
     icon: "cbi:waiputv",
     iconColor: teal[400],
+    title: "waipu tv",
   },
   {
     icon: "cbi:skysports-mainevent",
     bgColor: red[600],
+    title: "sky sports main nevent",
   },
   {
     icon: "cbi:apple-tv",
     iconColor: grey[800],
+    title: "apple tv",
   },
   {
     icon: "cbi:molotovtv",
     iconColor: grey[900],
     bgColor: yellow[600],
+    title: "molotov tv",
   },
   {
     icon: "cbi:kion-tv",
     iconColor: lightBlue[800],
+    title: "kion tv",
   },
   {
     icon: "cbi:ivi-tv",
     bgColor: green[600],
+    title: "ivi tv",
   },
 ];
 
@@ -63,12 +79,14 @@ export const CardItem = ({
   iconcolor,
   onClick,
   isActive,
+  title,
 }: {
   icon: string;
   bgcolor?: string;
   iconcolor?: string;
   onClick: () => void;
   isActive: boolean;
+  title?: string;
 }) => {
   return (
     <Stack
@@ -84,6 +102,9 @@ export const CardItem = ({
         transform: isActive ? "scale(1.2)" : "none",
       }}
     >
+      <Typography sx={{ opacity: 0, userSelect: "none", height: 0 }}>
+        {title}
+      </Typography>
       <Icon icon={icon} height="12vh" color={iconcolor || "white"} />
     </Stack>
   );
