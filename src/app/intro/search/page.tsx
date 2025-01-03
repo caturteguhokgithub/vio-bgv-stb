@@ -231,10 +231,19 @@ const SearchResultsContent = ({
 );
 
 export default function SearchResultsPage() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query");
+  // const searchParams = useSearchParams();
+  // const query = searchParams.get("query");
+
   const [results, setResults] = useState<FavType[]>([]);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  // const query = new URLSearchParams(window.location.search).get("query");
+
+  const [query, setQuery] = useState<string | null>(null);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query");
+    setQuery(query);
+  }, []);
 
   useEffect(() => {
     if (query) {
@@ -272,7 +281,7 @@ export default function SearchResultsPage() {
     <LayoutIntro>
       <Container>
         <Stack gap={6} mt="8vh">
-          <Suspense fallback={<div>Loading...</div>}>
+          {/* {typeof window !== "undefined" ? (
             <SearchResultsContent
               query={query}
               results={results}
@@ -280,6 +289,19 @@ export default function SearchResultsPage() {
               handleBoxClick={handleBoxClick}
               childVariants={childVariants}
             />
+          ) : (
+            <div>Loading...</div>
+          )} */}
+          <Suspense fallback={<div>Loading...</div>}>
+            {query !== null && (
+              <SearchResultsContent
+                query={query}
+                results={results}
+                activeIndex={activeIndex}
+                handleBoxClick={handleBoxClick}
+                childVariants={childVariants}
+              />
+            )}
           </Suspense>
         </Stack>
       </Container>
