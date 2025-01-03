@@ -16,11 +16,13 @@ import { blue, grey } from "@mui/material/colors";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
 import { MenuItems } from "./menuItems";
+import CompanyLogo from "@/components/CompanyLogo/page";
+import useBreakpoints from "@/themes/breakpoints";
 
 export function SideNav({
   toggleCollapse,
 }: {
-  toggleCollapse: boolean;
+  toggleCollapse?: boolean;
 }): React.JSX.Element {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [toggleHoverCollapse, setToggleHoverCollapse] = useState(false);
@@ -63,17 +65,19 @@ export function SideNav({
   const isActive = (path: string) =>
     pathname === path || pathname.startsWith(path);
 
+  const { onlyMediumScreen } = useBreakpoints();
+
   return (
     <Box
       // bgcolor="#F5F7F9"
       bgcolor={grey[50]}
       sx={{
-        display: { xs: "none", lg: "flex" },
+        // display: { xs: "none", lg: "flex" },
         flexDirection: "column",
         height: "100%",
         left: 0,
         maxWidth: "100%",
-        position: "fixed",
+        position: onlyMediumScreen ? "relative" : "fixed",
         scrollbarWidth: "none",
         top: 0,
         width: toggleCollapse ? "72px" : "var(--SideNav-width)",
@@ -89,18 +93,19 @@ export function SideNav({
       onMouseEnter={handleHoverCollapse}
       onMouseLeave={handleHoverCollapse}
     >
-      <Stack direction="row" justifyContent="center">
-        <Stack justifyContent="center" alignItems="flex-end" height={64}>
-          {/* <Box
-            className={`cssanimation ${
-              toggleCollapse && !toggleHoverCollapse
-                ? "blurInTop"
-                : "blurInBottom"
-            }`}
-          >
-            <CompanyLogo />
-          </Box> */}
-          <Typography
+      {!onlyMediumScreen && (
+        <Stack direction="row" justifyContent="center">
+          <Stack justifyContent="center" alignItems="flex-end" height={64}>
+            <Box
+              className={`cssanimation ${
+                toggleCollapse && !toggleHoverCollapse
+                  ? "blurInTop"
+                  : "blurInBottom"
+              }`}
+            >
+              <CompanyLogo size={toggleCollapse ? "xs" : ""} />
+            </Box>
+            {/* <Typography
             color="black"
             fontSize={16}
             fontWeight={600}
@@ -111,9 +116,10 @@ export function SideNav({
             }`}
           >
             {toggleCollapse && !toggleHoverCollapse ? "VBS" : "VIO BGV STB"}
-          </Typography>
+          </Typography> */}
+          </Stack>
         </Stack>
-      </Stack>
+      )}
       <Box
         component="nav"
         overflow="auto"
@@ -219,6 +225,12 @@ export function SideNav({
                                   a: {
                                     "&::marker": {
                                       color: grey[400],
+                                      transition: "all 300ms ease",
+                                    },
+                                    "&:hover": {
+                                      "&::marker": {
+                                        color: blue[700],
+                                      },
                                     },
                                   },
                                 }}
@@ -234,21 +246,36 @@ export function SideNav({
                                       px: 0,
                                       py: 0.7,
                                       borderRadius: 1,
+                                      span: {
+                                        transition: "all 300ms ease",
+                                      },
+                                      "&::marker": {
+                                        color:
+                                          pathname === subItem.path
+                                            ? `${blue[700]} !important`
+                                            : grey[400],
+                                      },
+                                      "&:hover": {
+                                        span: {
+                                          color: blue[700],
+                                        },
+                                      },
                                     }}
                                   >
-                                    <ListItemText sx={{ m: 0 }}>
-                                      <Typography
-                                        color={
-                                          pathname === subItem.path
-                                            ? blue[700]
-                                            : "black"
-                                        }
-                                        fontSize="0.83rem"
-                                        lineHeight={1}
-                                      >
-                                        {subItem.text}
-                                      </Typography>
-                                    </ListItemText>
+                                    {/* <ListItemText sx={{ m: 0 }}> */}
+                                    <Typography
+                                      component="span"
+                                      color={
+                                        pathname === subItem.path
+                                          ? blue[700]
+                                          : "black"
+                                      }
+                                      fontSize="0.83rem"
+                                      lineHeight={1}
+                                    >
+                                      {subItem.text}
+                                    </Typography>
+                                    {/* </ListItemText> */}
                                   </ListItem>
                                 ))}
                               </List>

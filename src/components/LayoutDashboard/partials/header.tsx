@@ -18,17 +18,21 @@ import { Stack } from "@mui/material";
 import { Icon } from "@iconify/react";
 
 import iTheme from "@/themes/themes";
+import useBreakpoints from "@/themes/breakpoints";
+import CompanyLogo from "@/components/CompanyLogo/page";
 
 export function HeaderNav({
   title,
   isDashboardView,
   toggleCollapse,
   handleToggleCollapse,
+  handleClickDrawer,
 }: {
   title?: string;
   isDashboardView?: boolean;
   toggleCollapse: boolean;
   handleToggleCollapse?: () => void;
+  handleClickDrawer?: () => void;
 }): React.JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -45,6 +49,28 @@ export function HeaderNav({
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  const { onlyMediumScreen } = useBreakpoints();
+
+  const menuCollapse = (
+    <IconButton
+      sx={{ p: 0 }}
+      className={`cssanimation ${
+        toggleCollapse ? "fadeInLeft" : "fadeInRight"
+      }`}
+      onClick={onlyMediumScreen ? handleClickDrawer : handleToggleCollapse}
+    >
+      <Icon
+        icon={
+          toggleCollapse
+            ? "line-md:menu-unfold-right"
+            : "line-md:menu-unfold-left"
+        }
+        height={24}
+        color={iTheme.palette.secondary.dark}
+      />
+    </IconButton>
+  );
+
   return (
     <Box
       px={3}
@@ -57,7 +83,6 @@ export function HeaderNav({
         zIndex: "var(--mui-zIndex-appBar)",
       }}
     >
-      {/* <Container maxWidth="xl"> */}
       <Stack
         direction="row"
         spacing={2}
@@ -65,62 +90,8 @@ export function HeaderNav({
         alignItems="center"
         height={64}
       >
-        {/* {isDashboardView ? (
-          <Stack
-            direction="row"
-            justifyContent="center"
-            sx={{ userSelect: "none" }}
-          >
-            <Stack justifyContent="center" height={64}>
-              <Box
-                component={Link}
-                href={paths.home}
-                sx={{ display: "inline-flex" }}
-              >
-                <Image
-                  src="https://res.cloudinary.com/caturteguh/image/upload/v1727302971/unimind/logo-unimind_f1ehza.png"
-                  alt="unimind"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{
-                    width: "76px",
-                    height: "auto",
-                  }}
-                />
-              </Box>
-              <Typography color="black" fontSize={16} fontWeight={600}>
-                VIO BGV STB
-              </Typography>
-            </Stack>
-          </Stack>
-        ) : (
-          <Typography
-            component="h2"
-            fontSize="1.2rem"
-            fontWeight={500}
-            color={iTheme.palette.secondary.dark}
-          >
-            {title}
-          </Typography>
-        )} */}
-        <IconButton
-          sx={{ p: 0 }}
-          className={`cssanimation ${
-            toggleCollapse ? "fadeInLeft" : "fadeInRight"
-          }`}
-          onClick={handleToggleCollapse}
-        >
-          <Icon
-            icon={
-              toggleCollapse
-                ? "line-md:menu-unfold-right"
-                : "line-md:menu-unfold-left"
-            }
-            height={24}
-            color={iTheme.palette.secondary.dark}
-          />
-        </IconButton>
+        {!onlyMediumScreen && menuCollapse}
+        {onlyMediumScreen && <CompanyLogo size="sm" />}
         <Stack alignItems="center" direction="row" spacing={2}>
           <Button
             aria-describedby={id}
@@ -134,19 +105,22 @@ export function HeaderNav({
               gap: 1,
             }}
           >
-            <Typography
-              fontSize="0.9rem"
-              textTransform={"capitalize"}
-              color={iTheme.palette.secondary.dark}
-            >
-              Administrator
-            </Typography>
+            {!onlyMediumScreen && (
+              <Typography
+                fontSize="0.9rem"
+                textTransform={"capitalize"}
+                color={iTheme.palette.secondary.dark}
+              >
+                Administrator
+              </Typography>
+            )}
             <Avatar
               alt="Account"
               src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
               sx={{ width: 32, height: 32 }}
             />
           </Button>
+          {onlyMediumScreen && menuCollapse}
           <Popover
             id={id}
             open={open}
@@ -181,7 +155,6 @@ export function HeaderNav({
           </Popover>
         </Stack>
       </Stack>
-      {/* </Container> */}
     </Box>
   );
 }

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Icon } from "@iconify/react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { blue, green, grey, orange, red, yellow } from "@mui/material/colors";
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
+import VideoPlayer from "./videoPlayer";
+import { AnimatePresence } from "framer-motion";
+import Modal from "@/components/Modal/modal";
 
 const dataFavorite = [
   {
@@ -81,6 +84,7 @@ export const CardItem = ({
 
 export default function SectionFavorite() {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [openModal, setOpenModal] = React.useState(false);
 
   const { onlySmallScreen, onlyLargeScreen } = useBreakpoints();
 
@@ -97,28 +101,49 @@ export default function SectionFavorite() {
     setActiveIndex(index);
   };
 
+  React.useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openModal]);
+
   return (
-    <Stack gap={2}>
-      <SectionTitle label="Favorite Apps" />
-      <Box ref={favoriteRef} className="keen-slider">
-        {dataFavorite.map((item, index) => (
-          <Box
-            className={`keen-slider__slide`}
-            key={index}
-            sx={{
-              transform: activeIndex === index ? "scale(1.2)" : "none",
-            }}
-          >
-            <CardItem
-              icon={item.icon}
-              bgcolor={item.bgColor}
-              iconcolor={item.iconColor}
-              isActive={activeIndex === index}
-              onClick={() => handleBoxClick(index)}
-            />
-          </Box>
-        ))}
-      </Box>
-    </Stack>
+    <Fragment>
+      <Stack gap={2}>
+        <SectionTitle label="Favorite Apps" />
+        <Box ref={favoriteRef} className="keen-slider">
+          {dataFavorite.map((item, index) => (
+            <Box
+              className={`keen-slider__slide`}
+              key={index}
+              sx={{
+                transform: activeIndex === index ? "scale(1.2)" : "none",
+              }}
+            >
+              <CardItem
+                icon={item.icon}
+                bgcolor={item.bgColor}
+                iconcolor={item.iconColor}
+                isActive={activeIndex === index}
+                // onClick={() => handleBoxClick(index)}
+                onClick={() => setOpenModal(true)}
+              />
+            </Box>
+          ))}
+        </Box>
+      </Stack>
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {openModal && (
+          <Modal handleClose={() => setOpenModal(false)}>
+            <VideoPlayer />
+          </Modal>
+        )}
+      </AnimatePresence>
+    </Fragment>
   );
 }

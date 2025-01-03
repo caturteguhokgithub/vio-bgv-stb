@@ -30,7 +30,7 @@ const BreadcrumbPage: React.FC<BreadcrumbPageProps> = ({ breadcrumbData }) => {
         return (
           <Fragment key={index}>
             {isLastItem ? (
-              <Link key={index}>
+              <Link key={index} underline="none">
                 <Typography
                   fontSize={13}
                   fontWeight={600}

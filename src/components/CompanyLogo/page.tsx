@@ -12,7 +12,7 @@ export default function CompanyLogo({
 }) {
   return (
     <Typography
-      fontSize={size == "xs" ? "1rem" : size == "sm" ? "2rem" : "3rem"}
+      fontSize={size == "xs" ? "1.5rem" : size == "sm" ? "2rem" : "3rem"}
       letterSpacing="-0.15em"
       lineHeight={1}
       position="relative"

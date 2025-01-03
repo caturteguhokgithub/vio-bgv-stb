@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Fragment } from "react";
 import DashboardLayout from "@/components/LayoutDashboard/layout";
 import TableDevice from "./partials/table";
 import { Button, Card } from "@mui/material";
@@ -9,6 +9,7 @@ import DialogComponent from "@/components/Dialog/dialog";
 import SnackbarSuccess from "@/components/Snackbar/snack";
 import FormDevice from "./partials/form";
 import BreadcrumbPage from "@/components/Breadcrumb/breadcrumb";
+import useBreakpoints from "@/themes/breakpoints";
 
 export default function DeviceConfigurePage() {
   const [modalOpenAdd, setModalOpenAdd] = React.useState(false);
@@ -20,21 +21,34 @@ export default function DeviceConfigurePage() {
     { label: "List" },
   ];
 
+  const { onlyMediumScreen } = useBreakpoints();
+
   return (
-    <>
+    <Fragment>
       <DashboardLayout
         title="Konfigurasi Perangkat"
         breadcrumbs={<BreadcrumbPage breadcrumbData={breadcrumbData} />}
         actionButton={
-          <Button
-            startIcon={<Icon icon="line-md:plus" />}
-            size="small"
-            variant="contained"
-            color="primary"
-            onClick={() => setModalOpenAdd(true)}
-          >
-            Tambah Perangkat
-          </Button>
+          onlyMediumScreen ? (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setModalOpenAdd(true)}
+              sx={{ p: 1.3, minWidth: 0 }}
+            >
+              <Icon icon="line-md:plus" />
+            </Button>
+          ) : (
+            <Button
+              startIcon={<Icon icon="line-md:plus" />}
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => setModalOpenAdd(true)}
+            >
+              Tambah Perangkat
+            </Button>
+          )
         }
       >
         <Card variant="outlined">
@@ -61,6 +75,6 @@ export default function DeviceConfigurePage() {
         handleSnackOpen={snackSuccess}
         handleSnackClose={() => setSnackSuccess(false)}
       />
-    </>
+    </Fragment>
   );
 }

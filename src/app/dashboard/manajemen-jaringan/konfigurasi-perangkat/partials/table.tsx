@@ -9,6 +9,7 @@ import DialogComponent from "@/components/Dialog/dialog";
 import FormDevice from "./form";
 import SnackbarAlert from "@/components/Snackbar/snack";
 import { deviceStatus, deviceType } from "@/dummy/dummy";
+import useBreakpoints from "@/themes/breakpoints";
 
 interface DataType {
   key?: React.Key;
@@ -76,6 +77,7 @@ const TableDevice: React.FC = () => {
       title: "IP Address",
       dataIndex: "ipAddress",
       key: "ipAddress",
+      width: 180,
     },
     {
       title: "Status",
@@ -153,6 +155,8 @@ const TableDevice: React.FC = () => {
     },
   ];
 
+  const { onlyMediumScreen } = useBreakpoints();
+
   return (
     <>
       <Box
@@ -168,6 +172,10 @@ const TableDevice: React.FC = () => {
           dataSource={dataDevice}
           showSorterTooltip={{ target: "sorter-icon" }}
           onChange={onChange}
+          scroll={{
+            x: onlyMediumScreen ? 1400 : "auto",
+            // y: onlyMediumScreen ? "80vh" : "auto",
+          }}
         />
       </Box>
       <DialogDelete

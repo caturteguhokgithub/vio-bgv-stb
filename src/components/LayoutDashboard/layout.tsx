@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Stack, Typography } from "@mui/material";
+import { Drawer, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
 import { HeaderNav } from "./partials/header";
 import { SideNav } from "./partials/sideNav";
 import { grey } from "@mui/material/colors";
+import useBreakpoints from "@/themes/breakpoints";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,6 +26,7 @@ export default function DashboardLayout({
   const drawerOpenKey = "drawerOpen";
 
   const [toggleCollapse, setToggleCollapse] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
@@ -41,8 +43,10 @@ export default function DashboardLayout({
     localStorage.setItem(drawerOpenKey, JSON.stringify(toggleCollapse));
   }, [toggleCollapse]);
 
+  const { onlyMediumScreen } = useBreakpoints();
+
   return (
-    <>
+    <React.Fragment>
       <GlobalStyles
         styles={{
           body: {
@@ -64,7 +68,7 @@ export default function DashboardLayout({
           minHeight: "100%",
         }}
       >
-        <SideNav toggleCollapse={toggleCollapse} />
+        {!onlyMediumScreen && <SideNav toggleCollapse={toggleCollapse} />}
         <Box
           sx={{
             display: "flex",
@@ -79,6 +83,7 @@ export default function DashboardLayout({
           <HeaderNav
             handleToggleCollapse={handleToggleCollapse}
             toggleCollapse={toggleCollapse}
+            handleClickDrawer={() => setOpenDrawer(true)}
           />
           <Box
             component="main"
@@ -129,12 +134,19 @@ export default function DashboardLayout({
           </Box>
           <Box component="footer">
             <Typography fontSize={14} color={grey[500]} py={2} px={3}>
-              Copyright &copy; {new Date().getFullYear()} | Bio BGV Set Top Box.
+              Copyright &copy; {new Date().getFullYear()} | Vio BGV Set Top Box.
               All Rights Reserved
             </Typography>
           </Box>
         </Box>
       </Box>
-    </>
+      <Drawer
+        anchor="right"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+      >
+        <SideNav toggleCollapse={false} />
+      </Drawer>
+    </React.Fragment>
   );
 }
