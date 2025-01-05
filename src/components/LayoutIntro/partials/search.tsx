@@ -15,6 +15,16 @@ export default function SearchBox({
 }) {
   const router = useRouter();
 
+  const { onlyMediumScreen } = useBreakpoints();
+
+  const textFieldRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (openSearch && textFieldRef.current) {
+      textFieldRef.current.focus();
+    }
+  }, [openSearch]);
+
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
       const searchQuery = event.target.value;
@@ -27,20 +37,11 @@ export default function SearchBox({
     }
   };
 
-  const { onlyMediumScreen } = useBreakpoints();
-
-  const textFieldRef = React.useRef<HTMLInputElement>(null);
-
-  React.useEffect(() => {
-    if (openSearch && textFieldRef.current) {
-      textFieldRef.current.focus();
-    }
-  }, [openSearch]);
-
   return (
     <Stack p={3} direction="row" gap={3}>
       {!onlyMediumScreen && <CompanyLogo dark />}
       <TextField
+        placeholder="Search title, program, channel"
         fullWidth
         inputRef={textFieldRef}
         onKeyDown={handleKeyPress}

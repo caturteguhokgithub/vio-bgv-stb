@@ -20,7 +20,11 @@ export default function Register() {
   const [togglePassword, setTogglePassword] = React.useState(false);
 
   return (
-    <LayoutLogin>
+    <LayoutLogin
+      loginLayout
+      title="Create Your Account"
+      desc="You will use this to watch on your favorite devices"
+    >
       <Grid container spacing={2} mt={4}>
         <Grid size={12}>
           <FormControl fullWidth>
@@ -80,17 +84,21 @@ export default function Register() {
         <Grid size={12} py={1}>
           <FormControl fullWidth>
             <Button
+              LinkComponent={Link}
+              href="/account/plan"
               variant="contained"
               color="error"
               sx={{
                 py: 2,
                 borderRadius: 2,
+                color: "white !important",
+
                 "&:hover": {
                   bgcolor: blue[800],
                 },
               }}
             >
-              Register Account
+              Create Account
             </Button>
           </FormControl>
         </Grid>

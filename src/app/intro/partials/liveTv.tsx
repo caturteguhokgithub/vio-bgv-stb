@@ -4,7 +4,6 @@ import { Box, Stack, Typography } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import {
-  blue,
   green,
   grey,
   lightBlue,
@@ -15,8 +14,6 @@ import {
 } from "@mui/material/colors";
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
-import { AnimatePresence } from "framer-motion";
-import Modal from "@/components/Modal/modal";
 import VideoPlayer from "./videoPlayer";
 
 export interface FavType {
@@ -132,17 +129,6 @@ export default function SectionLiveTv() {
     setActiveIndex(index);
   };
 
-  React.useEffect(() => {
-    if (openModal) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [openModal]);
-
   return (
     <Fragment>
       <Stack gap={2}>
@@ -154,6 +140,7 @@ export default function SectionLiveTv() {
               key={index}
               sx={{
                 transform: activeIndex === index ? "scale(1.2)" : "none",
+                cursor: "pointer",
               }}
             >
               <CardItem
@@ -168,13 +155,10 @@ export default function SectionLiveTv() {
           ))}
         </Box>
       </Stack>
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {openModal && (
-          <Modal handleClose={() => setOpenModal(false)}>
-            <VideoPlayer />
-          </Modal>
-        )}
-      </AnimatePresence>
+      <VideoPlayer
+        openModal={openModal}
+        setOpenModal={() => setOpenModal(false)}
+      />
     </Fragment>
   );
 }

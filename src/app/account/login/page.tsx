@@ -20,7 +20,11 @@ export default function Login() {
   const [togglePassword, setTogglePassword] = React.useState(false);
 
   return (
-    <LayoutLogin>
+    <LayoutLogin
+      loginLayout
+      title="Login Your Account"
+      desc="You will use this to watch on your favorite devices"
+    >
       <Grid container spacing={2} mt={4}>
         <Grid size={12}>
           <FormControl fullWidth>

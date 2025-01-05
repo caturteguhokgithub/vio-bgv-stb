@@ -60,6 +60,7 @@ export const MainMenu = ({
           color="inherit"
           fontSize={onlyMediumScreen ? "1rem" : "1.2rem"}
           fontWeight={isActive(href) ? 700 : 500}
+          sx={{ transition: "all 500ms ease-in-out" }}
         >
           {children}
         </Typography>

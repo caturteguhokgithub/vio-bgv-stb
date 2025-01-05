@@ -138,19 +138,21 @@ import LayoutIntro from "@/components/LayoutIntro/page";
 import {
   Box,
   Container,
+  InputAdornment,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
-import { useSearchParams } from "next/navigation";
 import { Fragment, Suspense, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import { CardItem, dataFavorite, FavType } from "../partials/liveTv";
 import React from "react";
 import { motion, Variants } from "motion/react";
+import { grey } from "@mui/material/colors";
 
 const ListItemSuggestion = ({ label }: { label: string }) => {
   return (
@@ -175,21 +177,55 @@ const SearchResultsContent = ({
   results,
   activeIndex,
   handleBoxClick,
+  handleSearchChange,
   childVariants,
 }: {
   query: any;
   results: any;
   activeIndex: any;
   handleBoxClick: any;
+  handleSearchChange: any;
   childVariants: any;
 }) => (
-  <Box color="white">
+  <Stack gap={3} color="white">
+    <TextField
+      placeholder="Search title, program, channel"
+      fullWidth
+      value={query}
+      onChange={handleSearchChange}
+      slotProps={{
+        inputLabel: {
+          shrink: true,
+        },
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <Iconify name="mdi:magnify" color="white" size={28} />
+            </InputAdornment>
+          ),
+        },
+      }}
+      sx={{
+        ".MuiInputBase-root": {
+          borderRadius: 2,
+          "&:hover": {
+            outline: `1px solid ${grey[400]}`,
+          },
+        },
+        ".MuiInputBase-input": {
+          color: "white",
+        },
+        fieldset: {
+          borderColor: grey[700],
+        },
+      }}
+    />
     {results.length > 0 ? (
       <Fragment>
         <Typography>
           Search results for "<strong>{query}</strong>"
         </Typography>
-        <Grid container spacing={2} mt={5}>
+        <Grid container spacing={2}>
           {results.map((item: any, index: any) => (
             <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={index}>
               <motion.div
@@ -227,18 +263,15 @@ const SearchResultsContent = ({
         </Box>
       </Stack>
     )}
-  </Box>
+  </Stack>
 );
 
 export default function SearchResultsPage() {
-  // const searchParams = useSearchParams();
-  // const query = searchParams.get("query");
-
   const [results, setResults] = useState<FavType[]>([]);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
-  // const query = new URLSearchParams(window.location.search).get("query");
 
   const [query, setQuery] = useState<string | null>(null);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const query = params.get("query");
@@ -257,6 +290,16 @@ export default function SearchResultsPage() {
 
   const handleBoxClick = (index: number) => {
     setActiveIndex(index);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuery = event.target.value;
+    setQuery(newQuery);
+    const searchQuery = newQuery.toLowerCase();
+    const filteredResults = dataFavorite.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery)
+    );
+    setResults(filteredResults);
   };
 
   const childVariants: Variants = {
@@ -281,17 +324,6 @@ export default function SearchResultsPage() {
     <LayoutIntro>
       <Container>
         <Stack gap={6} mt="8vh">
-          {/* {typeof window !== "undefined" ? (
-            <SearchResultsContent
-              query={query}
-              results={results}
-              activeIndex={activeIndex}
-              handleBoxClick={handleBoxClick}
-              childVariants={childVariants}
-            />
-          ) : (
-            <div>Loading...</div>
-          )} */}
           <Suspense fallback={<div>Loading...</div>}>
             {query !== null && (
               <SearchResultsContent
@@ -299,6 +331,7 @@ export default function SearchResultsPage() {
                 results={results}
                 activeIndex={activeIndex}
                 handleBoxClick={handleBoxClick}
+                handleSearchChange={handleSearchChange}
                 childVariants={childVariants}
               />
             )}

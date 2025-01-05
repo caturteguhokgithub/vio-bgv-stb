@@ -7,8 +7,6 @@ import { blue, green, grey, orange, red, yellow } from "@mui/material/colors";
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
 import VideoPlayer from "./videoPlayer";
-import { AnimatePresence } from "framer-motion";
-import Modal from "@/components/Modal/modal";
 
 const dataFavorite = [
   {
@@ -123,6 +121,7 @@ export default function SectionFavorite() {
               key={index}
               sx={{
                 transform: activeIndex === index ? "scale(1.2)" : "none",
+                cursor: "pointer",
               }}
             >
               <CardItem
@@ -137,13 +136,10 @@ export default function SectionFavorite() {
           ))}
         </Box>
       </Stack>
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {openModal && (
-          <Modal handleClose={() => setOpenModal(false)}>
-            <VideoPlayer />
-          </Modal>
-        )}
-      </AnimatePresence>
+      <VideoPlayer
+        openModal={openModal}
+        setOpenModal={() => setOpenModal(false)}
+      />
     </Fragment>
   );
 }

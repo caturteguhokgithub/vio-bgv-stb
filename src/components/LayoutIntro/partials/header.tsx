@@ -9,6 +9,7 @@ import CompanyLogo from "@/components/CompanyLogo/page";
 import useBreakpoints from "@/themes/breakpoints";
 import { MainMenu, MenuItems } from "./mainMenu";
 import SearchBox from "./search";
+import { usePathname } from "next/navigation";
 
 export default function IntroHeader() {
   const [openNotif, setOpenNotif] = React.useState(false);
@@ -19,7 +20,6 @@ export default function IntroHeader() {
 
   const ref = React.useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll();
-  const { scrollY } = useScroll();
 
   const headerY = useTransform(scrollYProgress, [0.3], ["0"]);
 
@@ -41,6 +41,7 @@ export default function IntroHeader() {
   }, []);
 
   const { onlySmallScreen, onlyMediumScreen } = useBreakpoints();
+  const pathname = usePathname();
 
   return (
     <Fragment>
@@ -88,9 +89,11 @@ export default function IntroHeader() {
               alignItems="center"
               gap={onlyMediumScreen ? 1 : 3}
             >
-              <IconButton onClick={() => setOpenSearch(true)}>
-                <Icon icon="mdi:magnify" color="white" height={24} />
-              </IconButton>
+              {!pathname.includes("/intro/search") && (
+                <IconButton onClick={() => setOpenSearch(true)}>
+                  <Icon icon="mdi:magnify" color="white" height={24} />
+                </IconButton>
+              )}
               {!onlyMediumScreen && (
                 <Fragment>
                   <IconButton onClick={() => setOpenNotif(true)}>
