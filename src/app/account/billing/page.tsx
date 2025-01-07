@@ -96,27 +96,27 @@ const DataBilling: IBilling[] = [
     icons: [
       {
         id: 1,
-        icon: "shopee",
+        icon: "visa",
         name: "Visa",
       },
       {
         id: 2,
-        icon: "dana",
+        icon: "mc",
         name: "MasterCard",
       },
       {
         id: 3,
-        icon: "ovo",
+        icon: "amex",
         name: "American Express",
       },
       {
         id: 4,
-        icon: "linkaja",
+        icon: "jcb",
         name: "JCB",
       },
       {
         id: 5,
-        icon: "doku",
+        icon: "discover",
         name: "Discover",
       },
     ],
@@ -283,24 +283,30 @@ export default function Billing() {
                           "1px solid rgba( 255, 255, 255, 0.1) !important",
                       }}
                     >
-                      {selectedItem?.value === item.value &&
-                      selectedItem.id === icon.id ? (
-                        <Box
-                          style={{
-                            position: "absolute",
-                            top: "50%",
-                            right: 16,
-                            transform: "translateY(-50%)",
-                            lineHeight: 1,
-                          }}
-                        >
+                      <Box
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: 16,
+                          transform: "translateY(-50%)",
+                          lineHeight: 1,
+                        }}
+                      >
+                        {selectedItem?.value === item.value &&
+                        selectedItem.id === icon.id ? (
                           <Iconify
                             name="line-md:circle-filled-to-confirm-circle-filled-transition"
                             color="white"
                             size={32}
                           />
-                        </Box>
-                      ) : null}
+                        ) : (
+                          <Iconify
+                            name="line-md:chevron-small-right"
+                            color="white"
+                            size={32}
+                          />
+                        )}
+                      </Box>
                       <Stack direction="row" alignItems="center" gap={2}>
                         <Image
                           alt="VIO"
@@ -329,7 +335,32 @@ export default function Billing() {
             </Stack>
           ))}
         </Stack>
-        <Box textAlign="center">
+        <Stack
+          display="inline-flex"
+          direction="row"
+          gap={2}
+          justifyContent="center"
+        >
+          <Button
+            startIcon={<Iconify name="line-md:arrow-small-left" />}
+            LinkComponent={Link}
+            href="/account/plan"
+            variant="contained"
+            sx={{
+              width: "auto",
+              minWidth: 150,
+              color: "white !important",
+              bgcolor: "rgba( 255, 255, 255, 0.1)",
+              border: "1px solid rgba( 255, 255, 255, 0.1)",
+              transition: "all 500ms ease-in-out",
+
+              "&:hover": {
+                bgcolor: "rgba( 255, 255, 255, 0.2)",
+              },
+            }}
+          >
+            Select Plan
+          </Button>
           <Button
             LinkComponent={Link}
             href="/account/billing"
@@ -337,12 +368,13 @@ export default function Billing() {
             color="error"
             sx={{
               width: "auto",
+              minWidth: 150,
               color: "white !important",
             }}
           >
-            Submit
+            Pay Rp79.000
           </Button>
-        </Box>
+        </Stack>
       </Stack>
     </LayoutLogin>
   );

@@ -65,7 +65,7 @@ export const IconEmptyState = ({ width }: { width?: number }) => {
         <path
           d="M57.75 25.74C58.7407 24.3499 60.1816 23.345 61.8285 22.8957C63.4754 22.4464 65.2269 22.5803 66.7864 23.2747C68.3458 23.9691 69.6172 25.1813 70.3852 26.7058C71.1531 28.2304 71.3703 29.9736 71 31.64"
           stroke={grey[400]}
-          stroke-width="0.68"
+          strokeWidth="0.68"
           strokeLinecap="round"
           strokeLinejoin="round"
         />

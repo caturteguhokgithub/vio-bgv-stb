@@ -325,6 +325,33 @@ export default function Plan() {
           ))}
         </ToggleButtonGroup>
       </Stack>
+      <Stack
+        display="inline-flex"
+        direction="row"
+        gap={2}
+        justifyContent="center"
+      >
+        <Button
+          startIcon={<Iconify name="line-md:arrow-small-left" />}
+          LinkComponent={Link}
+          href="/"
+          variant="contained"
+          sx={{
+            width: "auto",
+            minWidth: 150,
+            color: "white !important",
+            bgcolor: "rgba( 255, 255, 255, 0.1)",
+            border: "1px solid rgba( 255, 255, 255, 0.1)",
+            transition: "all 500ms ease-in-out",
+
+            "&:hover": {
+              bgcolor: "rgba( 255, 255, 255, 0.2)",
+            },
+          }}
+        >
+          Back to Home
+        </Button>
+      </Stack>
     </LayoutLogin>
   );
 }
