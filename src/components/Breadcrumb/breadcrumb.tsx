@@ -36,7 +36,7 @@ const BreadcrumbPage: React.FC<BreadcrumbPageProps> = ({ breadcrumbData }) => {
                   fontWeight={600}
                   color={grey[200]}
                   sx={{ cursor: "default" }}
-                  lineHeight={1}
+                  lineHeight={1.5}
                 >
                   {item.label}
                 </Typography>

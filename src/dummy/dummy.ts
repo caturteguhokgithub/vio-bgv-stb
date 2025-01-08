@@ -24,9 +24,27 @@ export const emailRandom = [
   "mariannehoover@entogrok.com",
 ];
 
+export const methodPaymentRandom = [
+  "Dana (e-wallet)",
+  "Shopeepay (e-wallet)",
+  "Ovo (e-wallet)",
+  "Linkaja (e-wallet)",
+  "Bank BNI (DC)",
+  "Bank Mandiri (DC)",
+  "Bank BCA (DC)",
+  "CIMB Niaga (DC)",
+  "MasterCard (CC)",
+  "Discover (CC)",
+  "Visa (CC)",
+];
+
+export const codePaymentRandom = ["EW", "DC", "CC"];
+
 export const deviceType = ["Access Point", "Switch", "Firewall", "Router"];
 
 export const deviceStatus = ["pending", "running"];
+
+export const paymentStatus = ["unpaid", "paid"];
 
 export const genreRandom = [
   "Horror",

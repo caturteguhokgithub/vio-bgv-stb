@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import { blue, grey } from "@mui/material/colors";
+import { blue, grey, red } from "@mui/material/colors";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
 import { MenuItems } from "./menuItems";
@@ -97,6 +97,8 @@ export function SideNav({
         <Stack direction="row" justifyContent="center">
           <Stack justifyContent="center" alignItems="flex-end" height={64}>
             <Box
+              component={Link}
+              href="/dashboard"
               className={`cssanimation ${
                 toggleCollapse && !toggleHoverCollapse
                   ? "blurInTop"
@@ -159,7 +161,7 @@ export function SideNav({
                               : "unset",
                           gap: 1,
                           ...(isActive(item.path) && {
-                            bgcolor: alpha(blue[700], 0.15),
+                            bgcolor: alpha(red[700], 0.15),
                             //   "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
                             boxShadow: "rgba(0, 0, 0, 0.1) 0px 3px 8px",
                           }),
@@ -177,7 +179,7 @@ export function SideNav({
                         >
                           <Icon
                             icon={item.icon}
-                            color={isActive(item.path) ? blue[700] : "black"}
+                            color={isActive(item.path) ? red[700] : "black"}
                             height={
                               toggleCollapse && !toggleHoverCollapse ? 24 : 18
                             }
@@ -187,9 +189,7 @@ export function SideNav({
                           <>
                             <ListItemText>
                               <Typography
-                                color={
-                                  isActive(item.path) ? blue[700] : "black"
-                                }
+                                color={isActive(item.path) ? red[700] : "black"}
                                 fontSize={14}
                               >
                                 {item.text}
@@ -229,7 +229,7 @@ export function SideNav({
                                     },
                                     "&:hover": {
                                       "&::marker": {
-                                        color: blue[700],
+                                        color: red[700],
                                       },
                                     },
                                   },
@@ -252,12 +252,12 @@ export function SideNav({
                                       "&::marker": {
                                         color:
                                           pathname === subItem.path
-                                            ? `${blue[700]} !important`
+                                            ? `${red[700]} !important`
                                             : grey[400],
                                       },
                                       "&:hover": {
                                         span: {
-                                          color: blue[700],
+                                          color: red[700],
                                         },
                                       },
                                     }}
@@ -267,7 +267,7 @@ export function SideNav({
                                       component="span"
                                       color={
                                         pathname === subItem.path
-                                          ? blue[700]
+                                          ? red[700]
                                           : "black"
                                       }
                                       fontSize="0.83rem"

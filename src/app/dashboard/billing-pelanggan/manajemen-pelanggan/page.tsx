@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Fragment } from "react";
 import DashboardLayout from "@/components/LayoutDashboard/layout";
 import { Button, Card } from "@mui/material";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -21,7 +21,7 @@ export default function BillingManagementPage() {
   ];
 
   return (
-    <>
+    <Fragment>
       <DashboardLayout
         title="Manajemen Pelanggan"
         breadcrumbs={<BreadcrumbPage breadcrumbData={breadcrumbData} />}
@@ -61,6 +61,6 @@ export default function BillingManagementPage() {
         handleSnackOpen={snackSuccess}
         handleSnackClose={() => setSnackSuccess(false)}
       />
-    </>
+    </Fragment>
   );
 }

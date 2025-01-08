@@ -19,13 +19,13 @@ export default function FormDevice({ mode }: { mode?: string }) {
               />
             ) : mode == "edit" ? (
               <TextField
-                value="Device 839"
+                value="Kennedy Blankenship"
                 variant="outlined"
                 size="small"
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             ) : (
-              <Typography>Device 839</Typography>
+              <Typography>Kennedy Blankenship</Typography>
             )}
           </FormControl>
         </Grid>

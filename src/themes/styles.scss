@@ -69,10 +69,11 @@ a:active {
 
 .bgTitle {
   position: relative;
-  background: rgb(21, 101, 192);
+  // background: rgb(21, 101, 192);
+  background: rgb(229, 57, 53);
   background: linear-gradient(
     90deg,
-    rgba(21, 101, 192, 1) 0%,
+    rgba(229, 57, 53, 1) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   &:after {
@@ -101,4 +102,19 @@ a:active {
     color: #fff;
     text-decoration: none;
   }
+}
+
+.ant-picker {
+  height: 40px;
+  border-color: rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  .ant-picker-input {
+    & > input {
+      font-size: 16px;
+    }
+  }
+}
+
+.ant-picker-dropdown {
+  z-index: 9999;
 }

@@ -2,22 +2,24 @@ import React from "react";
 import { Box, IconButton, Stack, Tooltip } from "@mui/material";
 import { blue, green, red } from "@mui/material/colors";
 import type { TableColumnsType, TableProps } from "antd";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 import { Icon } from "@iconify/react";
 import DialogDelete from "@/components/Dialog/delete";
 import DialogComponent from "@/components/Dialog/dialog";
-import FormDevice from "./form";
+import FormBilling from "./form";
 import SnackbarAlert from "@/components/Snackbar/snack";
-import { emailRandom, nameRandom } from "@/dummy/dummy";
+import { nameRandom, paymentStatus } from "@/dummy/dummy";
 import useBreakpoints from "@/themes/breakpoints";
 
 interface DataType {
   key?: number;
-  name: string;
-  email: string;
-  phone: string;
+  customer: string;
+  amount: string;
+  dueDate: string;
+  status: string;
   createdAt?: string;
 }
+
 const onChange: TableProps<DataType>["onChange"] = (
   pagination,
   filters,
@@ -27,7 +29,7 @@ const onChange: TableProps<DataType>["onChange"] = (
   console.log("params", pagination, filters, sorter, extra);
 };
 
-export default function TableCustomer() {
+export default function TableBilling() {
   const [dataDevice, setDataDevice] = React.useState<DataType[]>([]);
   const [modalDelete, setModalDelete] = React.useState(false);
   const [modalOpenEdit, setModalOpenEdit] = React.useState(false);
@@ -35,18 +37,47 @@ export default function TableCustomer() {
   const [snackSuccess, setSnackSuccess] = React.useState(false);
   const [snackDelete, setSnackDelete] = React.useState(false);
 
+  const getRandomSixDigitNumber = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+  };
+  const generateMultipleRandomNumbers = (count: number) => {
+    const randomNumbers = [];
+    for (let i = 0; i < count; i++) {
+      randomNumbers.push(getRandomSixDigitNumber());
+    }
+    return randomNumbers;
+  };
+  const numberOfItems = 123;
+  const randomSixDigitNumbers = generateMultipleRandomNumbers(numberOfItems);
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const randomDate = () => {
+    const year = 2024;
+    const month = Math.floor(Math.random() * 12);
+    const day = Math.floor(Math.random() * 28) + 1;
+    return new Date(year, month, day).toISOString().split("T")[0];
+  };
+
   React.useEffect(() => {
     const initialData = Array.from({ length: 123 }).map((_, i) => ({
       key: i + 1,
-      name: `${nameRandom[Math.floor(Math.random() * nameRandom.length)]}`,
-      email: `${emailRandom[Math.floor(Math.random() * emailRandom.length)]}`,
-      phone: `+62 ${Math.floor(
-        Math.random() * (999 - 100 + 1) + 100
-      )} ${Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)} ${Math.floor(
-        Math.random() * (9999 - 1000 + 1) + 1000
-      )}`,
+      customer: `${nameRandom[Math.floor(Math.random() * nameRandom.length)]}`,
+      amount: `${formatCurrency(randomSixDigitNumbers[i])}`,
+      dueDate: randomDate(),
+      status: `${
+        paymentStatus[Math.floor(Math.random() * paymentStatus.length)]
+      }`,
       createdAt: "2023-12-12 12:00:00",
     }));
+
     setDataDevice(initialData);
   }, []);
 
@@ -59,21 +90,37 @@ export default function TableCustomer() {
       width: 90,
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Customer Name",
+      dataIndex: "customer",
       key: "name",
-      sorter: (a: DataType, b: DataType) => a.name.localeCompare(b.name),
+      sorter: (a: DataType, b: DataType) =>
+        a.customer.localeCompare(b.customer),
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      sorter: (a: DataType, b: DataType) => a.email.localeCompare(b.email),
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      sorter: (a: DataType, b: DataType) =>
+        parseFloat(a.amount) - parseFloat(b.amount),
     },
     {
-      title: "Phone",
-      dataIndex: "phone",
-      key: "phone",
+      title: "Due Date",
+      dataIndex: "dueDate",
+      key: "dueDate",
+      sorter: (a: DataType, b: DataType) =>
+        new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      width: 200,
+      sorter: (a: DataType, b: DataType) => a.status.localeCompare(b.status),
+      render: (status: string) => (
+        <Tag color={status === "unpaid" ? "red" : "green"}>
+          {status.toUpperCase()}
+        </Tag>
+      ),
     },
     {
       title: "Created Date",
@@ -180,7 +227,7 @@ export default function TableCustomer() {
         width={480}
         dialogOpen={modalOpenEdit}
         dialogClose={() => setModalOpenEdit(false)}
-        title="Ubah Pelanggan"
+        title="Ubah Penagihan"
         labelCancel="Batal"
         labelSubmit="Simpan"
         handleModalCancel={() => setModalOpenEdit(false)}
@@ -189,16 +236,16 @@ export default function TableCustomer() {
           setSnackSuccess(true);
         }}
       >
-        <FormDevice mode="edit" />
+        <FormBilling mode="edit" />
       </DialogComponent>
       <DialogComponent
         closeButton
         width={480}
         dialogOpen={modalOpenView}
         dialogClose={() => setModalOpenView(false)}
-        title="Detail Pelanggan"
+        title="Detail Penagihan"
       >
-        <FormDevice mode="view" />
+        <FormBilling mode="view" />
       </DialogComponent>
       <SnackbarAlert
         handleSnackOpen={snackSuccess}

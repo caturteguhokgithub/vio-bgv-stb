@@ -2,9 +2,6 @@ import React from "react";
 import {
   Box,
   FormControl,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
@@ -12,10 +9,12 @@ import {
 } from "@mui/material";
 import FieldLabelInfo from "@/components/FieldLabelInfo/field";
 import Grid from "@mui/material/Grid2";
-import { green, grey, red } from "@mui/material/colors";
+import { green, red } from "@mui/material/colors";
+import type { DatePickerProps } from "antd";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
 
-export default function FormDevice({ mode }: { mode?: string }) {
-  const [type, setType] = React.useState("");
+export default function FormBilling({ mode }: { mode?: string }) {
   const [status, setStatus] = React.useState("");
 
   const handleChangeToggle = (
@@ -25,97 +24,71 @@ export default function FormDevice({ mode }: { mode?: string }) {
     setStatus(newStatus);
   };
 
-  const handleChangeSelect = (event: SelectChangeEvent) => {
-    setType(event.target.value as string);
+  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+    console.log(date, dateString);
   };
+
+  const dateFormat = "YYYY/MM/DD";
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid size={12}>
           <FormControl fullWidth>
-            <FieldLabelInfo title="Name" />
+            <FieldLabelInfo title="Customer Name" />
             {mode == "add" ? (
               <TextField
-                placeholder="Input name"
+                placeholder="Input customer name"
                 variant="outlined"
                 size="small"
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             ) : mode == "edit" ? (
               <TextField
-                value="Device 839"
+                value="Kennedy Blankenship"
                 variant="outlined"
                 size="small"
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             ) : (
-              <Typography>Device 839</Typography>
+              <Typography>Kennedy Blankenship</Typography>
             )}
           </FormControl>
         </Grid>
         <Grid size={12}>
           <FormControl fullWidth>
-            <FieldLabelInfo title="Type" />
-            {mode === "add" || mode === "edit" ? (
-              <Select
-                displayEmpty
+            <FieldLabelInfo title="Amount" />
+            {mode == "add" ? (
+              <TextField
+                placeholder="Input amount"
+                variant="outlined"
                 size="small"
-                value={mode === "add" ? type : "Firewall"}
-                onChange={handleChangeSelect}
-                renderValue={(value: any) => {
-                  if (!value) {
-                    return (
-                      <Typography color={grey[500]}>Choose type</Typography>
-                    );
-                  }
-                  return value;
-                }}
-              >
-                <MenuItem selected disabled>
-                  Choose type
-                </MenuItem>
-                <MenuItem value="Firewall">Firewall</MenuItem>
-                <MenuItem value="Switch">Switch</MenuItem>
-                <MenuItem value="Router">Router</MenuItem>
-                <MenuItem value="Access Point">Access Point</MenuItem>
-              </Select>
+                slotProps={{ inputLabel: { shrink: true } }}
+              />
+            ) : mode == "edit" ? (
+              <TextField
+                value="Rp 752.315"
+                variant="outlined"
+                size="small"
+                slotProps={{ inputLabel: { shrink: true } }}
+              />
             ) : (
-              <Typography>Access Point</Typography>
+              <Typography>Rp 752.315</Typography>
             )}
           </FormControl>
         </Grid>
         <Grid size={12}>
           <FormControl fullWidth>
-            <FieldLabelInfo title="IP Address" />
+            <FieldLabelInfo title="Due Date" />
             {mode === "add" ? (
-              <TextField
-                placeholder="Input IP Address"
-                variant="outlined"
-                size="small"
-                slotProps={{
-                  inputLabel: { shrink: true },
-                  htmlInput: {
-                    inputMode: "numeric",
-                    //   pattern: "^([0-9]{1,3}.){3}[0-9]{1,3}$",
-                  },
-                }}
-              />
+              <DatePicker onChange={onChange} />
             ) : mode === "edit" ? (
-              <TextField
-                value="192.168.1.225"
-                variant="outlined"
-                size="small"
-                slotProps={{
-                  inputLabel: { shrink: true },
-                  htmlInput: {
-                    inputMode: "numeric",
-                    //   pattern: "^([0-9]{1,3}.){3}[0-9]{1,3}$",
-                  },
-                }}
+              <DatePicker
+                onChange={onChange}
+                defaultValue={dayjs("2024/09/02", dateFormat)}
               />
             ) : (
-              <Typography>192.168.1.225</Typography>
+              <Typography>2024-09-02</Typography>
             )}
           </FormControl>
         </Grid>
@@ -129,7 +102,7 @@ export default function FormDevice({ mode }: { mode?: string }) {
               onChange={handleChangeToggle}
             >
               <ToggleButton
-                value="running"
+                value="paid"
                 sx={{
                   width: "50%",
                   color: green[600],
@@ -139,10 +112,10 @@ export default function FormDevice({ mode }: { mode?: string }) {
                   },
                 }}
               >
-                Running
+                Paid
               </ToggleButton>
               <ToggleButton
-                value="pending"
+                value="unpaid"
                 sx={{
                   width: "50%",
                   color: red[600],
@@ -152,7 +125,7 @@ export default function FormDevice({ mode }: { mode?: string }) {
                   },
                 }}
               >
-                Pending
+                Unpaid
               </ToggleButton>
             </ToggleButtonGroup>
           </FormControl>

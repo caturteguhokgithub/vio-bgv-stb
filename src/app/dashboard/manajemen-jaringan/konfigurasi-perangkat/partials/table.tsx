@@ -19,6 +19,7 @@ interface DataType {
   status: string;
   createdAt?: string;
 }
+
 const onChange: TableProps<DataType>["onChange"] = (
   pagination,
   filters,
