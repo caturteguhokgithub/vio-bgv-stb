@@ -102,20 +102,20 @@ export const dataAccount = [
     icon: "WR",
     title: "Woodward Richard",
     desc: "richard.woodward@polland.com",
-    href: "/customer",
+    href: "/bgv/customer",
   },
   {
     value: "2",
     icon: "AC",
     title: "Angelia Castaneda",
     desc: "angelia.castaneda@netherland.com",
-    href: "/customer",
+    href: "/bgv/customer",
   },
   {
     value: "3",
     icon: "DS",
     title: "Dillard Santos",
     desc: "s.dillard@spain.com",
-    href: "/customer",
+    href: "/bgv/customer",
   },
 ];

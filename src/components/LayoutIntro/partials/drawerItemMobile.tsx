@@ -32,7 +32,7 @@ export default function DrawerItemMobile() {
       }}
     >
       <MenuList>
-        <MenuItem component={Link} href="/">
+        <MenuItem component={Link} href="/bgv">
           <ListItemIcon>
             <Iconify name="mdi:home-outline" color="white" />
           </ListItemIcon>
@@ -40,7 +40,7 @@ export default function DrawerItemMobile() {
             <Typography color="white">Home</Typography>
           </ListItemText>
         </MenuItem>
-        <MenuItem component={Link} href="/intro/shop">
+        <MenuItem component={Link} href="/bgv/intro/shop">
           <ListItemIcon>
             <Iconify name="mdi:shopping-outline" color="white" />
           </ListItemIcon>
@@ -48,7 +48,7 @@ export default function DrawerItemMobile() {
             <Typography color="white">Shop</Typography>
           </ListItemText>
         </MenuItem>
-        <MenuItem component={Link} href="/intro/apps">
+        <MenuItem component={Link} href="/bgv/intro/apps">
           <ListItemIcon>
             <Iconify name="mdi:shape-plus-outline" color="white" />
           </ListItemIcon>
@@ -56,7 +56,7 @@ export default function DrawerItemMobile() {
             <Typography color="white">Apps</Typography>
           </ListItemText>
         </MenuItem>
-        <MenuItem component={Link} href="/intro/list">
+        <MenuItem component={Link} href="/bgv/intro/list">
           <ListItemIcon>
             <Iconify name="mdi:format-list-checks" color="white" />
           </ListItemIcon>

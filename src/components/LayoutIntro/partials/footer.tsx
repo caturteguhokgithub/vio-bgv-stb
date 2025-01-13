@@ -6,7 +6,7 @@ import CompanyLogo from "@/components/CompanyLogo/page";
 export default function IntroFooter() {
   return (
     <Stack gap={1} textAlign="center" px={3} py={2}>
-      <CompanyLogo dark size="sm" />
+      <CompanyLogo dark company="bgv" size="sm" />
       <Typography fontSize="12px" color={grey[600]}>
         Copyright {new Date().getFullYear()} &copy; Vio BGV Set Top Box. All
         Rights Reserved

@@ -69,8 +69,8 @@ export default function IntroHeader() {
             alignItems="center"
           >
             <Stack direction="row" alignItems="center" gap={8}>
-              <Link href="/">
-                <CompanyLogo dark />
+              <Link href="/bgv/">
+                <CompanyLogo dark company="bgv" />
               </Link>
               {!onlyMediumScreen && (
                 <Stack direction="row" alignItems="center" gap={4}>
@@ -89,7 +89,7 @@ export default function IntroHeader() {
               alignItems="center"
               gap={onlyMediumScreen ? 1 : 3}
             >
-              {!pathname.includes("/intro/search") && (
+              {!pathname.includes("/bgv/intro/search") && (
                 <IconButton onClick={() => setOpenSearch(true)}>
                   <Icon icon="mdi:magnify" color="white" height={24} />
                 </IconButton>

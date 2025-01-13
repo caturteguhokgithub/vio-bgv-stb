@@ -14,11 +14,13 @@ export default function LayoutLogin({
   title,
   desc,
   loginLayout,
+  noLogo,
 }: {
   children: React.ReactNode;
   title: string;
-  desc: string;
+  desc: React.ReactNode;
   loginLayout?: boolean;
+  noLogo?: boolean;
 }) {
   const { onlySmallScreen, onlyMediumScreen } = useBreakpoints();
 
@@ -48,10 +50,14 @@ export default function LayoutLogin({
           },
         }}
       >
-        {!loginLayout && (
-          <Box py={3}>
-            <CompanyLogo dark />
-          </Box>
+        {noLogo ? null : (
+          <>
+            {!loginLayout && (
+              <Box py={3}>
+                <CompanyLogo dark company="bgv" />
+              </Box>
+            )}
+          </>
         )}
         <Stack
           gap={onlyMediumScreen ? 4 : 6}
@@ -75,6 +81,8 @@ export default function LayoutLogin({
               fontSize="1rem"
               color={grey[400]}
               textAlign="center"
+              px={4}
+              // maxWidth={400}
             >
               {desc}
             </Typography>
@@ -82,6 +90,7 @@ export default function LayoutLogin({
           {loginLayout ? (
             <Box
               maxWidth={onlySmallScreen ? "90%" : 400}
+              margin="0 auto"
               px={4}
               py={5}
               boxShadow="0 8px 32px 0 rgba(221, 0, 0, 0.1)"
@@ -95,13 +104,13 @@ export default function LayoutLogin({
               }}
             >
               <Stack direction="row" justifyContent="center">
-                <CompanyLogo dark />
+                <CompanyLogo dark company="bgv" />
               </Stack>
               {children}
-              <Stack direction="row" justifyContent="center" mt={3}>
+              {/* <Stack direction="row" justifyContent="center" mt={3}>
                 <Button
                   LinkComponent={Link}
-                  href="/"
+                  href="/bgv"
                   startIcon={
                     <Iconify
                       name="mdi:arrow-left"
@@ -116,7 +125,7 @@ export default function LayoutLogin({
                 >
                   Back to Home
                 </Button>
-              </Stack>
+              </Stack> */}
             </Box>
           ) : (
             children

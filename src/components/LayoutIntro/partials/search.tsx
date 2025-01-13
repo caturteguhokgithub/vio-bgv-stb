@@ -31,7 +31,7 @@ export default function SearchBox({
       if (searchQuery === "") {
         router.push(`/`);
       } else {
-        router.push(`/intro/search?query=${searchQuery}`);
+        router.push(`/bgv/intro/search?query=${searchQuery}`);
       }
       setOpenSearch && setOpenSearch(false);
     }
@@ -39,7 +39,7 @@ export default function SearchBox({
 
   return (
     <Stack p={3} direction="row" gap={3}>
-      {!onlyMediumScreen && <CompanyLogo dark />}
+      {!onlyMediumScreen && <CompanyLogo dark company="bgv" />}
       <TextField
         placeholder="Search title, program, channel"
         fullWidth

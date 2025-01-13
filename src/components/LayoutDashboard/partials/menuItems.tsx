@@ -15,8 +15,23 @@ interface Group {
   groupLabel: string;
   items: Item[];
 }
+interface Menu {
+  text: string;
+  path: string;
+  icon: string;
+}
 
-export const MenuItems: Group[] = [
+export const MenuItemsVio: (Group | Menu)[] = [
+  {
+    text: "Dashboard",
+    path: "/dashboard",
+    icon: "line-md:folder-network-twotone",
+  },
+  {
+    text: "Overview",
+    path: "/overview",
+    icon: "line-md:folder-network-twotone",
+  },
   {
     groupName: "menu",
     groupLabel: "menu",
@@ -44,106 +59,138 @@ export const MenuItems: Group[] = [
           },
         ],
       },
+    ],
+  },
+];
+
+export const MenuItemsBgv: Group[] = [
+  {
+    groupName: "menu",
+    groupLabel: "menu",
+    items: [
+      {
+        text: "Manajemen Jaringan",
+        path: "/bgv/dashboard/manajemen-jaringan",
+        icon: "line-md:folder-network-twotone",
+        subItems: [
+          {
+            text: "Konfigurasi Perangkat",
+            path: "/bgv/dashboard/manajemen-jaringan/konfigurasi-perangkat",
+          },
+          {
+            text: "Topologi Jaringan",
+            path: "/bgv/dashboard/manajemen-jaringan/topologi-jaringan",
+          },
+          {
+            text: "VLAN & IP",
+            path: "/bgv/dashboard/manajemen-jaringan/pengaturan-vlan-ip",
+          },
+          {
+            text: "Pemantauan Jaringan",
+            path: "/bgv/dashboard/manajemen-jaringan/pemantauan-jaringan",
+          },
+        ],
+      },
       {
         text: "Billing & Pelanggan",
-        path: "/dashboard/billing-pelanggan",
+        path: "/bgv/dashboard/billing-pelanggan",
         icon: "line-md:text-box-multiple-twotone",
         subItems: [
           {
             text: "Manajemen Pelanggan",
-            path: "/dashboard/billing-pelanggan/manajemen-pelanggan",
+            path: "/bgv/dashboard/billing-pelanggan/manajemen-pelanggan",
           },
           {
             text: "Penagihan",
-            path: "/dashboard/billing-pelanggan/penagihan",
+            path: "/bgv/dashboard/billing-pelanggan/penagihan",
           },
           {
             text: "Paket Layanan",
-            path: "/dashboard/billing-pelanggan/paket-layanan",
+            path: "/bgv/dashboard/billing-pelanggan/paket-layanan",
           },
           {
             text: "Pembayaran",
-            path: "/dashboard/billing-pelanggan/pembayaran",
+            path: "/bgv/dashboard/billing-pelanggan/pembayaran",
           },
         ],
       },
       {
         text: "Middleware IPTV & OTT",
-        path: "/dashboard/middleware-iptv-ott",
+        path: "/bgv/dashboard/middleware-iptv-ott",
         icon: "line-md:monitor-twotone",
         subItems: [
           {
             text: "Manajemen Konten",
-            path: "/dashboard/middleware-iptv-ott/manajemen-konten",
+            path: "/bgv/dashboard/middleware-iptv-ott/manajemen-konten",
           },
           {
             text: "Integrasi OTT",
-            path: "/dashboard/middleware-iptv-ott/integrasi-ott",
+            path: "/bgv/dashboard/middleware-iptv-ott/integrasi-ott",
           },
           {
             text: "Distribusi Konten",
-            path: "/dashboard/middleware-iptv-ott/distribusi-konten",
+            path: "/bgv/dashboard/middleware-iptv-ott/distribusi-konten",
           },
           {
             text: "Personal Recommendation",
-            path: "/dashboard/middleware-iptv-ott/personal-recommendation",
+            path: "/bgv/dashboard/middleware-iptv-ott/personal-recommendation",
           },
         ],
       },
       {
         text: "Otomasi & Monitoring",
-        path: "/dashboard/otomasi-monitoring",
+        path: "/bgv/dashboard/otomasi-monitoring",
         icon: "line-md:gauge-full-twotone",
         subItems: [
           {
             text: "Manajemen Tugas Otomasi",
-            path: "/dashboard/otomasi-monitoring/manajemen-tugas-otomasi",
+            path: "/bgv/dashboard/otomasi-monitoring/manajemen-tugas-otomasi",
           },
           {
             text: "Pemantauan Sistem",
-            path: "/dashboard/otomasi-monitoring/pemantauan-sistem",
+            path: "/bgv/dashboard/otomasi-monitoring/pemantauan-sistem",
           },
           {
             text: "Alerting",
-            path: "/dashboard/otomasi-monitoring/alerting",
+            path: "/bgv/dashboard/otomasi-monitoring/alerting",
           },
         ],
       },
       {
         text: "Support & Helpdesk",
-        path: "/dashboard/support-helpdesk",
+        path: "/bgv/dashboard/support-helpdesk",
         icon: "line-md:phone-call-twotone",
         subItems: [
           {
             text: "Tiket Support",
-            path: "/dashboard/support-helpdesk/tiket-support",
+            path: "/bgv/dashboard/support-helpdesk/tiket-support",
           },
           {
             text: "Knowledge Base",
-            path: "/dashboard/support-helpdesk/knowledge-base",
+            path: "/bgv/dashboard/support-helpdesk/knowledge-base",
           },
           {
             text: "Feedback & Survei",
-            path: "/dashboard/support-helpdesk/feedback-survei",
+            path: "/bgv/dashboard/support-helpdesk/feedback-survei",
           },
         ],
       },
       {
         text: "Analytics & Big Data",
-        path: "/dashboard/analytics-big-data",
+        path: "/bgv/dashboard/analytics-big-data",
         icon: "line-md:cloud-alt-download-filled",
         subItems: [
           {
             text: "Laporan Penggunaan",
-            path: "/dashboard/analytics-big-data/laporan-penggunaan",
+            path: "/bgv/dashboard/analytics-big-data/laporan-penggunaan",
           },
           {
             text: "Analisis Konten",
-            path: "/dashboard/analytics-big-data/analisis-konten",
+            path: "/bgv/dashboard/analytics-big-data/analisis-konten",
           },
           {
             text: "Analitik Prediktif",
-            path: "/dashboard/analytics-big-data/analitik-prediktif",
+            path: "/bgv/dashboard/analytics-big-data/analitik-prediktif",
           },
         ],
       },

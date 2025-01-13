@@ -15,6 +15,7 @@ interface LayoutProps {
   title?: string;
   breadcrumbs?: React.ReactNode;
   actionButton?: React.ReactNode;
+  company?: string;
 }
 
 export default function DashboardLayout({
@@ -22,6 +23,7 @@ export default function DashboardLayout({
   title,
   breadcrumbs,
   actionButton,
+  company,
 }: LayoutProps): React.JSX.Element {
   const drawerOpenKey = "drawerOpen";
 
@@ -68,7 +70,9 @@ export default function DashboardLayout({
           minHeight: "100%",
         }}
       >
-        {!onlyMediumScreen && <SideNav toggleCollapse={toggleCollapse} />}
+        {!onlyMediumScreen && (
+          <SideNav toggleCollapse={toggleCollapse} company={company} />
+        )}
         <Box
           sx={{
             display: "flex",
@@ -145,7 +149,7 @@ export default function DashboardLayout({
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <SideNav toggleCollapse={false} />
+        <SideNav toggleCollapse={false} company={company} />
       </Drawer>
     </React.Fragment>
   );

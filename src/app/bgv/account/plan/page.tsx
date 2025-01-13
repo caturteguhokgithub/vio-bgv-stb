@@ -302,7 +302,7 @@ export default function Plan() {
                   <Box textAlign="center">
                     <Button
                       LinkComponent={Link}
-                      href="/account/billing"
+                      href="/bgv/account/billing"
                       disabled={item.value !== choosePlan}
                       variant="contained"
                       color="error"
@@ -334,7 +334,7 @@ export default function Plan() {
         <Button
           startIcon={<Iconify name="line-md:arrow-small-left" />}
           LinkComponent={Link}
-          href="/"
+          href="/bgv"
           variant="contained"
           sx={{
             width: "auto",

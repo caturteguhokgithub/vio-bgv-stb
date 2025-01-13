@@ -15,14 +15,16 @@ import Box from "@mui/material/Box";
 import { blue, grey, red } from "@mui/material/colors";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
-import { MenuItems } from "./menuItems";
+import { MenuItemsBgv } from "./menuItems";
 import CompanyLogo from "@/components/CompanyLogo/page";
 import useBreakpoints from "@/themes/breakpoints";
 
 export function SideNav({
   toggleCollapse,
+  company,
 }: {
   toggleCollapse?: boolean;
+  company?: string;
 }): React.JSX.Element {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [toggleHoverCollapse, setToggleHoverCollapse] = useState(false);
@@ -35,7 +37,7 @@ export function SideNav({
 
   useEffect(() => {
     const newOpen: Record<string, boolean> = {};
-    MenuItems.forEach((group, groupIndex) => {
+    MenuItemsBgv.forEach((group, groupIndex) => {
       group.items.forEach((item, itemIndex) => {
         if (item.subItems) {
           item.subItems.forEach((subItem) => {
@@ -105,7 +107,10 @@ export function SideNav({
                   : "blurInBottom"
               }`}
             >
-              <CompanyLogo size={toggleCollapse ? "xs" : ""} />
+              <CompanyLogo
+                company={company}
+                size={toggleCollapse ? "xs" : ""}
+              />
             </Box>
             {/* <Typography
             color="black"
@@ -132,7 +137,7 @@ export function SideNav({
         }}
       >
         <Stack spacing={3} sx={{ listStyle: "none", m: 0, p: 0 }}>
-          {MenuItems.map((menu, groupIndex) => (
+          {MenuItemsBgv.map((menu, groupIndex) => (
             <Box key={groupIndex}>
               <Typography
                 component="h3"

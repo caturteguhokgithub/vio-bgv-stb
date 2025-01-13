@@ -16,20 +16,20 @@ import Iconify from "@/components/Icon/iconify";
 import LayoutLogin from "@/components/LayoutLogin/page";
 import { sxTfPassword } from "@/lib/constants";
 
-export default function Register() {
+export default function Login() {
   const [togglePassword, setTogglePassword] = React.useState(false);
 
   return (
     <LayoutLogin
       loginLayout
-      title="Create Your Account"
+      title="Login Your Account"
       desc="You will use this to watch on your favorite devices"
     >
       <Grid container spacing={2} mt={4}>
         <Grid size={12}>
           <FormControl fullWidth>
             <TextField
-              placeholder="Add Email or Phone Number"
+              placeholder="Email or Phone Number"
               variant="outlined"
               slotProps={{ inputLabel: { shrink: true } }}
               sx={{
@@ -52,7 +52,7 @@ export default function Register() {
           <FormControl fullWidth>
             <TextField
               type={togglePassword ? "text" : "password"}
-              placeholder="Add Password"
+              placeholder="Password"
               variant="outlined"
               slotProps={{
                 input: {
@@ -84,31 +84,26 @@ export default function Register() {
         <Grid size={12} py={1}>
           <FormControl fullWidth>
             <Button
-              LinkComponent={Link}
-              href="/account/plan"
               variant="contained"
-              color="error"
+              color="primary"
               sx={{
                 py: 2,
                 borderRadius: 2,
-                color: "white !important",
-
                 "&:hover": {
                   bgcolor: blue[800],
                 },
               }}
             >
-              Create Account
+              Login
             </Button>
           </FormControl>
         </Grid>
         <Grid size={12}>
           <Typography color={grey[400]} align="center" fontSize="0.9rem">
-            Already have an acount?{" "}
             <Typography
               fontSize="0.9rem"
               component={Link}
-              href={"/account/login"}
+              href={"/bgv/account/forgot"}
               sx={{
                 color: "white !important",
                 transition: "all 300ms ease",
@@ -117,7 +112,26 @@ export default function Register() {
                 },
               }}
             >
-              Login Here
+              Forgot password?
+            </Typography>
+          </Typography>
+        </Grid>
+        <Grid size={12}>
+          <Typography color={grey[400]} align="center" fontSize="0.9rem">
+            New to VIO?{" "}
+            <Typography
+              fontSize="0.9rem"
+              component={Link}
+              href={"/bgv/account/register"}
+              sx={{
+                color: "white !important",
+                transition: "all 300ms ease",
+                "&:hover": {
+                  color: `${blue[500]} !important`,
+                },
+              }}
+            >
+              Register Now
             </Typography>
           </Typography>
         </Grid>

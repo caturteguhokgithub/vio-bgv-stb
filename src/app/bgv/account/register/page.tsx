@@ -16,20 +16,42 @@ import Iconify from "@/components/Icon/iconify";
 import LayoutLogin from "@/components/LayoutLogin/page";
 import { sxTfPassword } from "@/lib/constants";
 
-export default function Login() {
+export default function Register() {
   const [togglePassword, setTogglePassword] = React.useState(false);
 
   return (
     <LayoutLogin
       loginLayout
-      title="Login Your Account"
+      title="Create Your Account"
       desc="You will use this to watch on your favorite devices"
     >
       <Grid container spacing={2} mt={4}>
         <Grid size={12}>
           <FormControl fullWidth>
             <TextField
-              placeholder="Email or Phone Number"
+              placeholder="Username"
+              variant="outlined"
+              slotProps={{ inputLabel: { shrink: true } }}
+              sx={{
+                input: {
+                  color: "white",
+                  backgroundColor: "rgba( 255, 255, 255, 0.1)",
+                  border: "1px solid rgba( 255, 255, 255, 0.5)",
+                  borderRadius: 2,
+
+                  "&::placeholder": {
+                    color: grey[400],
+                    opacity: 1,
+                  },
+                },
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid size={12}>
+          <FormControl fullWidth>
+            <TextField
+              placeholder="Email"
               variant="outlined"
               slotProps={{ inputLabel: { shrink: true } }}
               sx={{
@@ -81,30 +103,56 @@ export default function Login() {
             />
           </FormControl>
         </Grid>
+        <Grid size={12}>
+          <FormControl fullWidth>
+            <TextField
+              placeholder="Referral Code"
+              variant="outlined"
+              slotProps={{ inputLabel: { shrink: true } }}
+              sx={{
+                input: {
+                  color: "white",
+                  backgroundColor: "rgba( 255, 255, 255, 0.1)",
+                  border: "1px solid rgba( 255, 255, 255, 0.5)",
+                  borderRadius: 2,
+
+                  "&::placeholder": {
+                    color: grey[400],
+                    opacity: 1,
+                  },
+                },
+              }}
+            />
+          </FormControl>
+        </Grid>
         <Grid size={12} py={1}>
           <FormControl fullWidth>
             <Button
+              LinkComponent={Link}
+              href="/bgv/account/verification"
               variant="contained"
-              color="error"
+              color="primary"
               sx={{
                 py: 2,
                 borderRadius: 2,
+                color: "white !important",
+
                 "&:hover": {
                   bgcolor: blue[800],
                 },
               }}
             >
-              Login
+              Create Account
             </Button>
           </FormControl>
         </Grid>
         <Grid size={12}>
           <Typography color={grey[400]} align="center" fontSize="0.9rem">
-            New to VIO?{" "}
+            Already have an acount?{" "}
             <Typography
               fontSize="0.9rem"
               component={Link}
-              href={"/account/register"}
+              href={"/bgv/account/login"}
               sx={{
                 color: "white !important",
                 transition: "all 300ms ease",
@@ -113,7 +161,7 @@ export default function Login() {
                 },
               }}
             >
-              Register Now
+              Login Here
             </Typography>
           </Typography>
         </Grid>

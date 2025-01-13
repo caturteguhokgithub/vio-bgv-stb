@@ -310,7 +310,7 @@ export default function Billing() {
                       <Stack direction="row" alignItems="center" gap={2}>
                         <Image
                           alt="VIO"
-                          src={`/images/${imageIcon}.png`}
+                          src={`/images/payment/${imageIcon}.png`}
                           width={0}
                           height={0}
                           sizes="100vw"
@@ -344,7 +344,7 @@ export default function Billing() {
           <Button
             startIcon={<Iconify name="line-md:arrow-small-left" />}
             LinkComponent={Link}
-            href="/account/plan"
+            href="/bgv/account/plan"
             variant="contained"
             sx={{
               width: "auto",
@@ -363,7 +363,7 @@ export default function Billing() {
           </Button>
           <Button
             LinkComponent={Link}
-            href="/account/billing"
+            href="/bgv/account/billing"
             variant="contained"
             color="error"
             sx={{

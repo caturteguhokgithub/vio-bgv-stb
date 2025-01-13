@@ -153,14 +153,14 @@ export default function DrawerItem({
                 icon="line-md:plus-circle"
                 title="Add Account"
                 desc="Login to different account"
-                href="/account/register"
+                href="/bgv/account/register"
               />
               <ToggleBtnItem
                 bgcolor={red[800]}
                 icon="line-md:log-out"
                 title="Logout"
                 desc="Logout to move apps"
-                href="/account/login"
+                href="/bgv/account/login"
               />
             </Stack>
           </Stack>

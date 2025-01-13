@@ -9,19 +9,23 @@ import { blue } from "@mui/material/colors";
 export const MenuItems = [
   {
     label: "Home",
-    path: "/",
+    path: "/bgv",
   },
   {
-    label: "Shop",
-    path: "/intro/shop",
+    label: "TV",
+    path: "/bgv/intro/shop",
   },
   {
-    label: "Apps",
-    path: "/intro/apps",
+    label: "Video",
+    path: "/bgv/intro/apps",
+  },
+  {
+    label: "Games",
+    path: "/bgv/intro/apps",
   },
   {
     label: "My List",
-    path: "/intro/list",
+    path: "/bgv/intro/list",
   },
 ];
 

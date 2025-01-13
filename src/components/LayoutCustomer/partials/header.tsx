@@ -42,7 +42,7 @@ export default function HeaderCustomer() {
           <Stack direction="row" justifyContent="space-between" py={2}>
             <Box className="blurInBottom">
               <Link href="/customer">
-                <CompanyLogo />
+                <CompanyLogo company="bgv" />
               </Link>
             </Box>
             <Stack direction="row">

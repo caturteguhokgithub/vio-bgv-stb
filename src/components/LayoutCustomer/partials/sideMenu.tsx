@@ -10,27 +10,27 @@ const MenuItem = [
   {
     icon: "mdi:home-account",
     label: "Overview",
-    path: "/customer",
+    path: "/bgv/customer",
   },
   {
     icon: "mdi:card-account-details-star",
     label: "Membership",
-    path: "/customer/membership",
+    path: "/bgv/customer/membership",
   },
   {
     icon: "mdi:shield-lock",
     label: "Security",
-    path: "/customer/security",
+    path: "/bgv/customer/security",
   },
   {
     icon: "mdi:monitor-cellphone",
     label: "Devices",
-    path: "/customer/device",
+    path: "/bgv/customer/device",
   },
   {
     icon: "mdi:account-box-multiple",
     label: "Profiles",
-    path: "/customer/profile",
+    path: "/bgv/customer/profile",
   },
 ];
 

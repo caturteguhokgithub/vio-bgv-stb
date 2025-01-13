@@ -91,7 +91,7 @@ export function HeaderNav({
         height={64}
       >
         {!onlyMediumScreen && menuCollapse}
-        {onlyMediumScreen && <CompanyLogo size="sm" />}
+        {onlyMediumScreen && <CompanyLogo size="sm" company="bgv" />}
         <Stack alignItems="center" direction="row" spacing={2}>
           <Button
             aria-describedby={id}

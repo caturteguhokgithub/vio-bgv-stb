@@ -1,14 +1,16 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { blue, red } from "@mui/material/colors";
 import { cfMonoton } from "@/lib/constants";
 
 export default function CompanyLogo({
   dark,
   size,
+  company,
 }: {
   dark?: boolean;
   size?: string;
+  company?: string;
 }) {
   return (
     <Typography
@@ -25,30 +27,30 @@ export default function CompanyLogo({
     >
       <Box
         component="span"
-        color={red[100]}
+        color={company == "vio" ? red[100] : blue[100]}
         className={cfMonoton.className}
         position="relative"
         top={2}
       >
-        v
+        {company == "vio" ? "v" : "b"}
       </Box>
       <Box
         component="span"
-        color={red[300]}
+        color={company == "vio" ? red[300] : blue[300]}
         className={cfMonoton.className}
         position="relative"
         top={2}
       >
-        i
+        {company == "vio" ? "i" : "g"}
       </Box>
       <Box
         component="span"
-        color={red[600]}
+        color={company == "vio" ? red[600] : blue[600]}
         className={cfMonoton.className}
         position="relative"
         top={2}
       >
-        o
+        {company == "vio" ? "o" : "v"}
       </Box>
       {/* <span style={{ width: 8, display: "inline-block" }}> </span>
   <span>b</span>

@@ -2,11 +2,12 @@
 
 import React from "react";
 import { Stack } from "@mui/material";
-import SectionFavorite from "./partials/favorite";
-import SectionLiveTv from "./partials/liveTv";
 import LayoutIntro from "@/components/LayoutIntro/page";
 import IntroBgTitle from "./partials/bg";
 import useBreakpoints from "@/themes/breakpoints";
+import SectionTvChannel from "./partials/tv";
+import SectionOtt from "./partials/ott";
+import SectionGames from "./partials/games";
 
 export default function Intro() {
   const { onlySmallScreen } = useBreakpoints();
@@ -15,10 +16,9 @@ export default function Intro() {
     <LayoutIntro>
       <IntroBgTitle />
       <Stack gap={6} mt={onlySmallScreen ? "6vh" : "8vh"}>
-        <SectionFavorite />
-        <SectionLiveTv />
-        <SectionFavorite />
-        <SectionLiveTv />
+        <SectionTvChannel />
+        <SectionOtt />
+        <SectionGames />
       </Stack>
     </LayoutIntro>
   );
