@@ -15,20 +15,23 @@ const iTheme = createTheme({
       default: "#131010",
     },
     primary: {
-      main: "#1880C9",
+      main: "#04163E",
       light: "#F4F5F7",
-      dark: "#05004E",
+      dark: "#020414",
     },
     secondary: {
-      main: "#1880C9",
-      dark: "#1f2937",
+      main: "#04163e",
+      dark: "#020414",
+    },
+    info: {
+      main: "#01559F",
     },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          maxHeight: "100vh",
+          // maxHeight: "100vh",
           maxWidth: "100vw",
           transition: "all 300ms ease",
           backgroundColor: "var(--mui-palette-background-default)",

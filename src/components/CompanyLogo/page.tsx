@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Box, Typography } from "@mui/material";
 import { blue, red } from "@mui/material/colors";
 import { cfMonoton } from "@/lib/constants";
+import Image from "next/image";
 
 export default function CompanyLogo({
   dark,
@@ -25,7 +26,7 @@ export default function CompanyLogo({
         userSelect: "none",
       }}
     >
-      <Box
+      {/* <Box
         component="span"
         color={company == "vio" ? red[100] : blue[100]}
         className={cfMonoton.className}
@@ -51,15 +52,50 @@ export default function CompanyLogo({
         top={2}
       >
         {company == "vio" ? "o" : "v"}
-      </Box>
-      {/* <span style={{ width: 8, display: "inline-block" }}> </span>
-  <span>b</span>
-  <span>g</span>
-  <span>v</span>
-  <span style={{ width: 8, display: "inline-block" }}> </span>
-  <span>s</span>
-  <span>t</span>
-  <span>b</span> */}
+      </Box> */}
+      {company == "vio" ? (
+        <Fragment>
+          <Box
+            component="span"
+            color={company == "vio" ? red[100] : blue[100]}
+            className={cfMonoton.className}
+            position="relative"
+            top={2}
+          >
+            v
+          </Box>
+          <Box
+            component="span"
+            color={company == "vio" ? red[300] : blue[300]}
+            className={cfMonoton.className}
+            position="relative"
+            top={2}
+          >
+            i
+          </Box>
+          <Box
+            component="span"
+            color={company == "vio" ? red[600] : blue[600]}
+            className={cfMonoton.className}
+            position="relative"
+            top={2}
+          >
+            o
+          </Box>
+        </Fragment>
+      ) : (
+        <Image
+          alt="BGV"
+          src={`/logo.png`}
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{
+            width: "auto",
+            height: "60px",
+          }}
+        />
+      )}
     </Typography>
   );
 }

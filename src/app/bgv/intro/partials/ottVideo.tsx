@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { alpha, Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import useBreakpoints from "@/themes/breakpoints";
@@ -7,54 +7,36 @@ import { SectionTitle } from "@/components/SectionTitle";
 import VideoPlayer from "./videoPlayer";
 import Image from "next/image";
 import { blue } from "@mui/material/colors";
-import iTheme from "@/themes/themes";
 
 export interface DataType {
   image?: string | any;
   bgColor?: string;
   title?: string | any;
+  vip?: boolean;
 }
 
 export const data: DataType[] = [
   {
-    image: "asphalt",
-    title: "Asphalt",
+    image: "handsome-guys",
+    title: "Handsome Guys",
+    vip: true,
   },
   {
-    image: "bowling",
-    title: "Bowling",
+    image: "lost-in-love",
+    title: "Lost in Love",
   },
   {
-    image: "cocomelon",
-    title: "Cocomelon",
+    image: "my-love",
+    title: "My Love Mix-Up",
   },
   {
-    image: "cut-rope",
-    title: "Cut Rope",
+    image: "redflag",
+    title: "How to Spot a Red Flag",
+    vip: true,
   },
   {
-    image: "gta",
-    title: "Grand Theft Auto",
-  },
-  {
-    image: "ludo",
-    title: "Ludo",
-  },
-  {
-    image: "shooting",
-    title: "Shooting",
-  },
-  {
-    image: "solitaire",
-    title: "Solitaire",
-  },
-  {
-    image: "spongebob",
-    title: "Spongebob Squarepants",
-  },
-  {
-    image: "transformer",
-    title: "Transformer",
+    image: "running-man",
+    title: "Running Man",
   },
 ];
 
@@ -64,19 +46,21 @@ export const CardItem = ({
   onClick,
   isActive,
   title,
+  vip,
 }: {
   image: string;
   bgcolor?: string;
   onClick: () => void;
   isActive: boolean;
   title?: string;
+  vip?: boolean;
 }) => {
   return (
     <Stack
       justifyContent="center"
       alignItems="center"
-      // width="100px"
-      // height="100px"
+      // width="100%"
+      // height="22vh"
       // bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
@@ -84,14 +68,14 @@ export const CardItem = ({
       position="relative"
       sx={{
         transform: isActive ? "scale(1.2)" : "none",
-        // backgroundImage: `url(/images/games/${image}.png)`,
+        // backgroundImage: `url(/images/ott/${image}.jpeg)`,
         // backgroundSize: "cover",
         // backgroundPosition: "center",
       }}
     >
       <Image
         alt="BGV"
-        src={`/images/games/${image}.png`}
+        src={`/images/ottVideo/${image}.jpeg`}
         width={0}
         height={0}
         sizes="100vw"
@@ -101,38 +85,40 @@ export const CardItem = ({
           borderRadius: 16,
         }}
       />
-      <Box
-        bgcolor={alpha(blue[900], 0.7)}
-        width="100%"
-        px={1.75}
-        py={0.75}
-        position="absolute"
-        left={0}
-        bottom={0}
-        sx={{
-          borderRadius: "16px",
-          borderTopLeftRadius: 0,
-          borderTopRightRadius: 0,
-        }}
-      >
-        <Typography
-          color="white"
-          noWrap
+      <Typography sx={{ opacity: 0, userSelect: "none", height: 0 }}>
+        {title}
+      </Typography>
+      {vip && (
+        <Box
+          px={2}
+          py={0.75}
+          position="absolute"
+          top={0}
+          right={0}
           sx={{
-            opacity: 1,
-            userSelect: "none",
-            height: "auto",
-            textOverflow: "ellipsis",
+            borderTopRightRadius: 16,
+            borderBottomLeftRadius: 16,
+            backgroundSize: "200% auto",
+            backgroundImage:
+              "linear-gradient(to right, #ffb347 0%, #ffcc33  51%, #ffb347  100%)",
+            boxShadow: "rgba(100, 100, 111, 0.9) 0px 2px 16px 0px",
+            transition: "0.5s",
+
+            "&:hover": {
+              backgroundPosition: "right center",
+            },
           }}
         >
-          {title}
-        </Typography>
-      </Box>
+          <Typography color="white" fontWeight={700} fontSize={12}>
+            VIP
+          </Typography>
+        </Box>
+      )}
     </Stack>
   );
 };
 
-export default function SectionGames() {
+export default function SectionOttVideo() {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const [openModal, setOpenModal] = React.useState(false);
 
@@ -142,7 +128,7 @@ export default function SectionGames() {
     loop: true,
     mode: "snap",
     slides: {
-      // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 7,
+      // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 4,
       perView: "auto",
       spacing: 16,
     },
@@ -155,7 +141,7 @@ export default function SectionGames() {
   return (
     <Fragment>
       <Stack gap={2}>
-        <SectionTitle label="Games Channels" />
+        <SectionTitle label="Video Channels" />
         <Box ref={favoriteRef} className="keen-slider">
           {data.map((item, index) => (
             <Box
@@ -167,8 +153,8 @@ export default function SectionGames() {
               }}
             >
               <CardItem
+                vip={item.vip}
                 image={item.image}
-                title={item.title}
                 bgcolor={item.bgColor}
                 isActive={activeIndex === index}
                 onClick={() => setOpenModal(true)}

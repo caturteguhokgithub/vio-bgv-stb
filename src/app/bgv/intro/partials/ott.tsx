@@ -5,6 +5,7 @@ import { useKeenSlider } from "keen-slider/react";
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
 import VideoPlayer from "./videoPlayer";
+import Image from "next/image";
 
 export interface DataType {
   image?: string | any;
@@ -14,24 +15,32 @@ export interface DataType {
 
 export const data: DataType[] = [
   {
-    image: "handsome-guys",
-    title: "Handsome Guys",
+    image: "youtube",
+    title: "youtube",
   },
   {
-    image: "lost-in-love",
-    title: "Lost in Love",
+    image: "vidio",
+    title: "vidio",
   },
   {
-    image: "my-love",
-    title: "My Love Mix-Up",
+    image: "viu",
+    title: "viu",
   },
   {
-    image: "redflag",
-    title: "How to Spot a Red Flag",
+    image: "wetv",
+    title: "We TV",
   },
   {
-    image: "running-man",
-    title: "Running Man",
+    image: "netflix",
+    title: "netflix",
+  },
+  {
+    image: "prime",
+    title: "prime",
+  },
+  {
+    image: "mtv",
+    title: "mtv",
   },
 ];
 
@@ -53,18 +62,29 @@ export const CardItem = ({
       justifyContent="center"
       alignItems="center"
       width="100%"
-      height="22vh"
+      height="16vh"
       bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
-      borderRadius={2}
+      borderRadius={3}
       sx={{
         transform: isActive ? "scale(1.2)" : "none",
-        backgroundImage: `url(/images/ott/${image}.jpeg)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        // backgroundImage: `url(/images/ott/${image}.jpeg)`,
+        // backgroundSize: "cover",
+        // backgroundPosition: "center",
       }}
     >
+      <Image
+        alt="BGV"
+        src={`/images/ott/${image}.png`}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{
+          width: "70%",
+          height: "auto",
+        }}
+      />
       <Typography sx={{ opacity: 0, userSelect: "none", height: 0 }}>
         {title}
       </Typography>
@@ -80,10 +100,11 @@ export default function SectionOtt() {
 
   const [favoriteRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    mode: "free-snap",
+    mode: "snap",
     slides: {
-      perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 4,
-      spacing: 15,
+      // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 4,
+      perView: "auto",
+      spacing: 16,
     },
   });
 
@@ -94,12 +115,8 @@ export default function SectionOtt() {
   return (
     <Fragment>
       <Stack gap={2}>
-        <SectionTitle label="Video Channel" />
-        <Box
-          ref={favoriteRef}
-          className="keen-slider"
-          // sx={{ overflow: "visible !important" }}
-        >
+        <SectionTitle label="Video Channels" />
+        <Box ref={favoriteRef} className="keen-slider">
           {data.map((item, index) => (
             <Box
               className={`keen-slider__slide`}

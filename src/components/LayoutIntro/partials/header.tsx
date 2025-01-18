@@ -1,15 +1,24 @@
 import React, { Fragment } from "react";
 import { Icon } from "@iconify/react";
-import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  alpha,
+  Avatar,
+  Box,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import DrawerMenu from "./drawerMenu";
 import DrawerItem from "./drawerItem";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import CompanyLogo from "@/components/CompanyLogo/page";
+import Image from "next/image";
 import useBreakpoints from "@/themes/breakpoints";
 import { MainMenu, MenuItems } from "./mainMenu";
 import SearchBox from "./search";
 import { usePathname } from "next/navigation";
+import iTheme from "@/themes/themes";
 
 export default function IntroHeader() {
   const [openNotif, setOpenNotif] = React.useState(false);
@@ -43,6 +52,12 @@ export default function IntroHeader() {
   const { onlySmallScreen, onlyMediumScreen } = useBreakpoints();
   const pathname = usePathname();
 
+  const iconButtonStyle = {
+    bgcolor: iTheme.palette.info.main,
+    transition: "all 500ms ease-in-out",
+    "&:hover": { bgcolor: alpha(iTheme.palette.info.main, 0.8) },
+  };
+
   return (
     <Fragment>
       <motion.header
@@ -58,7 +73,7 @@ export default function IntroHeader() {
           transition: "all 0.3s ease",
           y: headerY,
           backgroundColor: conditionalStyle
-            ? "var(--mui-palette-background-default)"
+            ? iTheme.palette.secondary.main
             : "transparent",
         }}
       >
@@ -68,9 +83,29 @@ export default function IntroHeader() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Stack direction="row" alignItems="center" gap={8}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              gap={8}
+              sx={{
+                "& > a": {
+                  lineHeight: 1,
+                },
+              }}
+            >
               <Link href="/bgv/">
-                <CompanyLogo dark company="bgv" />
+                <Image
+                  alt="BGV"
+                  src={`/logo.png`}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{
+                    width: "auto",
+                    height: "60px",
+                  }}
+                />
+                {/* <CompanyLogo dark company="bgv" /> */}
               </Link>
               {!onlyMediumScreen && (
                 <Stack direction="row" alignItems="center" gap={4}>
@@ -90,28 +125,43 @@ export default function IntroHeader() {
               gap={onlyMediumScreen ? 1 : 3}
             >
               {!pathname.includes("/bgv/intro/search") && (
-                <IconButton onClick={() => setOpenSearch(true)}>
+                <IconButton
+                  sx={iconButtonStyle}
+                  onClick={() => setOpenSearch(true)}
+                >
                   <Icon icon="mdi:magnify" color="white" height={24} />
                 </IconButton>
               )}
               {!onlyMediumScreen && (
                 <Fragment>
-                  <IconButton onClick={() => setOpenNotif(true)}>
+                  <IconButton
+                    sx={iconButtonStyle}
+                    onClick={() => setOpenNotif(true)}
+                  >
                     <Icon
                       icon="mdi:bell-badge-outline"
                       color="white"
                       height={24}
                     />
                   </IconButton>
-                  <IconButton onClick={() => setOpenInput(true)}>
+                  <IconButton
+                    sx={iconButtonStyle}
+                    onClick={() => setOpenInput(true)}
+                  >
                     <Icon icon="mdi:login-variant" color="white" height={24} />
                   </IconButton>
-                  <IconButton onClick={() => setOpenSetting(true)}>
+                  <IconButton
+                    sx={iconButtonStyle}
+                    onClick={() => setOpenSetting(true)}
+                  >
                     <Icon icon="mdi:cog-outline" color="white" height={24} />
                   </IconButton>
                 </Fragment>
               )}
-              <IconButton onClick={() => setOpenAccount(true)}>
+              <IconButton
+                sx={iconButtonStyle}
+                onClick={() => setOpenAccount(true)}
+              >
                 <Avatar sx={{ width: 24, height: 24, bgcolor: "white" }}>
                   <Typography fontSize="0.7rem">CT</Typography>
                 </Avatar>

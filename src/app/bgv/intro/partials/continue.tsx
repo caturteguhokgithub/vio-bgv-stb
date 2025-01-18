@@ -1,60 +1,49 @@
 import React, { Fragment } from "react";
-import { alpha, Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, styled, Typography } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
 import VideoPlayer from "./videoPlayer";
 import Image from "next/image";
-import { blue } from "@mui/material/colors";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 import iTheme from "@/themes/themes";
+import { blue } from "@mui/material/colors";
 
 export interface DataType {
   image?: string | any;
   bgColor?: string;
+  progress: number;
   title?: string | any;
 }
 
 export const data: DataType[] = [
   {
-    image: "asphalt",
-    title: "Asphalt",
+    image: "movie-1",
+    title: "Handsome Guys",
+    progress: 20,
   },
   {
-    image: "bowling",
-    title: "Bowling",
+    image: "movie-2",
+    title: "Lost in Love",
+    progress: 88,
   },
   {
-    image: "cocomelon",
-    title: "Cocomelon",
+    image: "movie-3",
+    title: "My Love Mix-Up",
+    progress: 10,
   },
   {
-    image: "cut-rope",
-    title: "Cut Rope",
+    image: "movie-4",
+    title: "How to Spot a Red Flag",
+    progress: 50,
   },
   {
-    image: "gta",
-    title: "Grand Theft Auto",
-  },
-  {
-    image: "ludo",
-    title: "Ludo",
-  },
-  {
-    image: "shooting",
-    title: "Shooting",
-  },
-  {
-    image: "solitaire",
-    title: "Solitaire",
-  },
-  {
-    image: "spongebob",
-    title: "Spongebob Squarepants",
-  },
-  {
-    image: "transformer",
-    title: "Transformer",
+    image: "movie-5",
+    title: "Running Man",
+    progress: 44,
   },
 ];
 
@@ -75,23 +64,22 @@ export const CardItem = ({
     <Stack
       justifyContent="center"
       alignItems="center"
-      // width="100px"
-      // height="100px"
+      // width="100%"
+      // height="22vh"
       // bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
       // borderRadius={2}
-      position="relative"
       sx={{
         transform: isActive ? "scale(1.2)" : "none",
-        // backgroundImage: `url(/images/games/${image}.png)`,
+        // backgroundImage: `url(/images/ott/${image}.jpeg)`,
         // backgroundSize: "cover",
         // backgroundPosition: "center",
       }}
     >
       <Image
         alt="BGV"
-        src={`/images/games/${image}.png`}
+        src={`/images/continue/${image}.jpeg`}
         width={0}
         height={0}
         sizes="100vw"
@@ -99,40 +87,18 @@ export const CardItem = ({
           width: "100%",
           height: "auto",
           borderRadius: 16,
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
         }}
       />
-      <Box
-        bgcolor={alpha(blue[900], 0.7)}
-        width="100%"
-        px={1.75}
-        py={0.75}
-        position="absolute"
-        left={0}
-        bottom={0}
-        sx={{
-          borderRadius: "16px",
-          borderTopLeftRadius: 0,
-          borderTopRightRadius: 0,
-        }}
-      >
-        <Typography
-          color="white"
-          noWrap
-          sx={{
-            opacity: 1,
-            userSelect: "none",
-            height: "auto",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {title}
-        </Typography>
-      </Box>
+      <Typography sx={{ opacity: 0, userSelect: "none", height: 0 }}>
+        {title}
+      </Typography>
     </Stack>
   );
 };
 
-export default function SectionGames() {
+export default function SectionContinue() {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const [openModal, setOpenModal] = React.useState(false);
 
@@ -142,7 +108,7 @@ export default function SectionGames() {
     loop: true,
     mode: "snap",
     slides: {
-      // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 7,
+      // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 4,
       perView: "auto",
       spacing: 16,
     },
@@ -152,10 +118,30 @@ export default function SectionGames() {
     setActiveIndex(index);
   };
 
+  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 6,
+    borderRadius: 16,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.grey[700],
+      ...theme.applyStyles("dark", {
+        backgroundColor: theme.palette.grey[800],
+      }),
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 1,
+      backgroundColor: blue[500],
+      ...theme.applyStyles("dark", {
+        backgroundColor: "#308fe8",
+      }),
+    },
+  }));
+
   return (
     <Fragment>
       <Stack gap={2}>
-        <SectionTitle label="Games Channels" />
+        <SectionTitle label="Continue Watching" />
         <Box ref={favoriteRef} className="keen-slider">
           {data.map((item, index) => (
             <Box
@@ -168,10 +154,13 @@ export default function SectionGames() {
             >
               <CardItem
                 image={item.image}
-                title={item.title}
                 bgcolor={item.bgColor}
                 isActive={activeIndex === index}
                 onClick={() => setOpenModal(true)}
+              />
+              <BorderLinearProgress
+                variant="determinate"
+                value={item.progress}
               />
             </Box>
           ))}

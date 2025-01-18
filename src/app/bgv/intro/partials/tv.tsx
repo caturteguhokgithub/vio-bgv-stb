@@ -1,17 +1,7 @@
 import React, { Fragment } from "react";
-import { Icon } from "@iconify/react";
 import { Box, Stack, Typography } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import {
-  green,
-  grey,
-  lightBlue,
-  orange,
-  red,
-  teal,
-  yellow,
-} from "@mui/material/colors";
 import useBreakpoints from "@/themes/breakpoints";
 import { SectionTitle } from "@/components/SectionTitle";
 import VideoPlayer from "./videoPlayer";
@@ -91,19 +81,16 @@ export const CardItem = ({
     <Stack
       justifyContent="center"
       alignItems="center"
-      width="100%"
-      height="18vh"
+      width="120px"
+      height="120px"
       bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
-      borderRadius={2}
+      borderRadius="50%"
       sx={{
         transform: isActive ? "scale(1.2)" : "none",
       }}
     >
-      <Typography sx={{ opacity: 0, userSelect: "none", height: 0 }}>
-        {title}
-      </Typography>
       <Image
         alt="BGV"
         src={`/images/tv/${image}.png`}
@@ -111,10 +98,25 @@ export const CardItem = ({
         height={0}
         sizes="100vw"
         style={{
-          width: "auto",
-          height: "100%",
+          width: "70%",
+          height: "auto",
+          borderRadius: "50%",
         }}
       />
+      <Typography sx={{ opacity: 0, userSelect: "none", height: 0 }}>
+        {title}
+      </Typography>
+      {/* <Image
+        alt="BGV"
+        src={`/images/tv/${image}.png`}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{
+          width: "auto",
+          height: "160px",
+        }}
+      /> */}
     </Stack>
   );
 };
@@ -127,17 +129,18 @@ export default function SectionTvChannel() {
 
   const [favoriteRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    mode: "free-snap",
+    mode: "snap",
     slides: {
-      perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 5,
-      spacing: 15,
+      // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 7,
+      perView: "auto",
+      spacing: 8,
     },
   });
 
   return (
     <Fragment>
       <Stack gap={2}>
-        <SectionTitle label="TV Channel" />
+        <SectionTitle label="TV Channels" />
         <Box
           ref={favoriteRef}
           className="keen-slider"
