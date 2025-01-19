@@ -15,11 +15,12 @@ const iTheme = createTheme({
       default: "#131010",
     },
     primary: {
-      main: "#04163E",
+      main: "#01559F",
       light: "#F4F5F7",
       dark: "#020414",
     },
     secondary: {
+      light: "#054794",
       main: "#04163e",
       dark: "#020414",
     },

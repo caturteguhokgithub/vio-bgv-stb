@@ -39,7 +39,7 @@ export default function LayoutLogin({
             position: "absolute",
             width: "35%",
             height: "55%",
-            backgroundColor: red[600],
+            backgroundColor: blue[600],
             borderRadius: "50%",
             left: "50%",
             top: "50%",
@@ -60,7 +60,7 @@ export default function LayoutLogin({
           </>
         )}
         <Stack
-          gap={onlyMediumScreen ? 4 : 6}
+          gap={onlyMediumScreen ? 2 : 3}
           position="relative"
           zIndex={1}
           overflow="auto"
@@ -93,7 +93,7 @@ export default function LayoutLogin({
               margin="0 auto"
               px={4}
               py={5}
-              boxShadow="0 8px 32px 0 rgba(221, 0, 0, 0.1)"
+              boxShadow="0 8px 32px 0 rgba(0, 0, 221, 0.1)"
               borderRadius={3}
               border="1px solid rgba( 255, 255, 255, 0.1)"
               sx={{

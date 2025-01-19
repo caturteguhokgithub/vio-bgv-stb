@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { alpha, Box, Button, Stack, Typography } from "@mui/material";
 import Iconify from "@/components/Icon/iconify";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -94,8 +94,10 @@ const NavLink = ({
           initial={false}
           layout
           style={{
-            background:
-              "linear-gradient(90deg, rgba(255,205,210,1) 0%, rgba(255,255,255,0) 100%)",
+            background: `linear-gradient(90deg, ${alpha(
+              blue[600],
+              0.4
+            )} 0%, rgba(255,255,255,0) 100%)`,
             borderRadius: 8,
             position: "absolute",
             width: "100%",

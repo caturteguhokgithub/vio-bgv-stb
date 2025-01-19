@@ -10,6 +10,7 @@ import SectionOtt from "./partials/ott";
 import SectionGames from "./partials/games";
 import SectionContinue from "./partials/continue";
 import SectionOttVideo from "./partials/ottVideo";
+import SectionBaner from "./partials/banner";
 
 export default function Intro() {
   const { onlySmallScreen } = useBreakpoints();
@@ -17,7 +18,8 @@ export default function Intro() {
   return (
     <LayoutIntro>
       {/* <IntroBgTitle /> */}
-      <Stack gap={6} mt={onlySmallScreen ? "6vh" : "8vh"}>
+      <Stack gap={6} mt={onlySmallScreen ? "4vh" : "4vh"}>
+        <SectionBaner />
         <SectionTvChannel />
         <SectionOtt />
         <SectionGames />

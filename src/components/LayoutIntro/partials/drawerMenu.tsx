@@ -1,6 +1,7 @@
 import React from "react";
 import { Drawer } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import iTheme from "@/themes/themes";
 
 export default function DrawerMenu({
   open,
@@ -22,7 +23,8 @@ export default function DrawerMenu({
       anchor={position || "right"}
       sx={{
         ".MuiDrawer-paper": {
-          bgcolor: grey[900],
+          // bgcolor: grey[900],
+          bgcolor: iTheme.palette.secondary.main,
           overflowX: "hidden",
           width:
             position === "top"

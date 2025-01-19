@@ -6,6 +6,7 @@ import {
   Box,
   IconButton,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import DrawerMenu from "./drawerMenu";
@@ -63,7 +64,7 @@ export default function IntroHeader() {
       <motion.header
         ref={ref}
         style={{
-          marginTop: onlySmallScreen ? 24 : "calc(7 * 8px)",
+          marginTop: onlySmallScreen ? 24 : "calc(4 * 8px)",
           paddingInline: conditionalStyle ? 24 : onlyMediumScreen ? 24 : 80,
           paddingBlock: conditionalStyle ? 16 : "unset",
           position: "sticky",
@@ -107,7 +108,7 @@ export default function IntroHeader() {
                 />
                 {/* <CompanyLogo dark company="bgv" /> */}
               </Link>
-              {!onlyMediumScreen && (
+              {/* {!onlyMediumScreen && (
                 <Stack direction="row" alignItems="center" gap={4}>
                   <Stack flexDirection="row" gap={3}>
                     {MenuItems.map(({ label, path }, i) => (
@@ -117,7 +118,7 @@ export default function IntroHeader() {
                     ))}
                   </Stack>
                 </Stack>
-              )}
+              )} */}
             </Stack>
             <Stack
               direction="row"
@@ -134,38 +135,62 @@ export default function IntroHeader() {
               )}
               {!onlyMediumScreen && (
                 <Fragment>
-                  <IconButton
-                    sx={iconButtonStyle}
-                    onClick={() => setOpenNotif(true)}
-                  >
-                    <Icon
-                      icon="mdi:bell-badge-outline"
-                      color="white"
-                      height={24}
-                    />
-                  </IconButton>
-                  <IconButton
-                    sx={iconButtonStyle}
-                    onClick={() => setOpenInput(true)}
-                  >
-                    <Icon icon="mdi:login-variant" color="white" height={24} />
-                  </IconButton>
-                  <IconButton
-                    sx={iconButtonStyle}
-                    onClick={() => setOpenSetting(true)}
-                  >
-                    <Icon icon="mdi:cog-outline" color="white" height={24} />
-                  </IconButton>
+                  <Tooltip title="Notification">
+                    <IconButton
+                      sx={iconButtonStyle}
+                      onClick={() => setOpenNotif(true)}
+                    >
+                      <Icon
+                        icon="mdi:bell-badge-outline"
+                        color="white"
+                        height={24}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="VIP">
+                    <IconButton
+                      sx={iconButtonStyle}
+                      onClick={() => setOpenInput(true)}
+                    >
+                      <Icon
+                        icon="ri:vip-crown-line"
+                        color="white"
+                        height={24}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Input Source">
+                    <IconButton
+                      sx={iconButtonStyle}
+                      onClick={() => setOpenInput(true)}
+                    >
+                      <Icon
+                        icon="mdi:login-variant"
+                        color="white"
+                        height={24}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Setting">
+                    <IconButton
+                      sx={iconButtonStyle}
+                      onClick={() => setOpenSetting(true)}
+                    >
+                      <Icon icon="mdi:cog-outline" color="white" height={24} />
+                    </IconButton>
+                  </Tooltip>
                 </Fragment>
               )}
-              <IconButton
-                sx={iconButtonStyle}
-                onClick={() => setOpenAccount(true)}
-              >
-                <Avatar sx={{ width: 24, height: 24, bgcolor: "white" }}>
-                  <Typography fontSize="0.7rem">CT</Typography>
-                </Avatar>
-              </IconButton>
+              <Tooltip title="Account">
+                <IconButton
+                  sx={iconButtonStyle}
+                  onClick={() => setOpenAccount(true)}
+                >
+                  <Avatar sx={{ width: 24, height: 24, bgcolor: "white" }}>
+                    <Typography fontSize="0.7rem">CT</Typography>
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
             </Stack>
           </Stack>
         </Box>

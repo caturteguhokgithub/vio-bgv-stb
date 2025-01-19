@@ -13,6 +13,13 @@ export default function LayoutIntro({
 }) {
   const { onlyMediumScreen } = useBreakpoints();
 
+  React.useEffect(() => {
+    document.body.classList.add("dark-mode");
+
+    // unmount action
+    return () => document.body.classList.remove("dark-mode");
+  }, []);
+
   return (
     <Fragment>
       <IntroHeader />

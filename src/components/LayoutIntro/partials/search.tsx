@@ -5,6 +5,7 @@ import { InputAdornment, Stack, TextField } from "@mui/material";
 import CompanyLogo from "@/components/CompanyLogo/page";
 import useBreakpoints from "@/themes/breakpoints";
 import { grey } from "@mui/material/colors";
+import iTheme from "@/themes/themes";
 
 export default function SearchBox({
   setOpenSearch,
@@ -38,7 +39,13 @@ export default function SearchBox({
   };
 
   return (
-    <Stack p={3} direction="row" gap={3}>
+    <Stack
+      p={3}
+      alignItems="center"
+      direction="row"
+      gap={3}
+      bgcolor={iTheme.palette.secondary.main}
+    >
       {!onlyMediumScreen && <CompanyLogo dark company="bgv" />}
       <TextField
         placeholder="Search title, program, channel"
@@ -68,7 +75,7 @@ export default function SearchBox({
             color: "white",
           },
           fieldset: {
-            borderColor: grey[700],
+            borderColor: grey[100],
           },
         }}
       />

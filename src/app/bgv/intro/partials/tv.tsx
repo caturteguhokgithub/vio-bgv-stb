@@ -81,8 +81,8 @@ export const CardItem = ({
     <Stack
       justifyContent="center"
       alignItems="center"
-      width="120px"
-      height="120px"
+      width="125px"
+      height="125px"
       bgcolor={bgcolor || "white"}
       className={isActive ? "active" : ""}
       onClick={onClick}
@@ -133,7 +133,7 @@ export default function SectionTvChannel() {
     slides: {
       // perView: onlySmallScreen ? 2 : onlyLargeScreen ? 3 : 7,
       perView: "auto",
-      spacing: 8,
+      spacing: 16,
     },
   });
 
@@ -153,6 +153,7 @@ export default function SectionTvChannel() {
               sx={{
                 transform: activeIndex === index ? "scale(1.2)" : "none",
                 cursor: "pointer",
+                width: "126px !important",
               }}
             >
               <CardItem
