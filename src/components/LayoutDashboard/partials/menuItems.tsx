@@ -1,21 +1,21 @@
-interface SubItem {
+export interface SubItem {
   text: string;
   path: string;
 }
 
-interface Item {
+export interface Item {
   text: string;
   path: string;
   icon: string;
   subItems?: SubItem[];
 }
 
-interface Group {
+export interface Group {
   groupName: string;
   groupLabel: string;
   items: Item[];
 }
-interface Menu {
+export interface Menu {
   text: string;
   path: string;
   icon: string;
@@ -24,38 +24,35 @@ interface Menu {
 export const MenuItemsVio: (Group | Menu)[] = [
   {
     text: "Dashboard",
-    path: "/dashboard",
-    icon: "line-md:folder-network-twotone",
+    path: "/vio/dashboard",
+    icon: "line-md:speed-twotone",
   },
   {
-    text: "Overview",
-    path: "/overview",
-    icon: "line-md:folder-network-twotone",
+    text: "Product",
+    path: "/vio/product",
+    icon: "line-md:clipboard-plus-twotone",
+  },
+  {
+    text: "Voucher",
+    path: "/vio/voucher",
+    icon: "line-md:text-box-multiple-twotone",
   },
   {
     groupName: "menu",
     groupLabel: "menu",
     items: [
       {
-        text: "Manajemen Jaringan",
-        path: "/dashboard/manajemen-jaringan",
-        icon: "line-md:folder-network-twotone",
+        text: "Manajemen Akun",
+        path: "/vio/account",
+        icon: "line-md:person-twotone",
         subItems: [
           {
-            text: "Konfigurasi Perangkat",
-            path: "/dashboard/manajemen-jaringan/konfigurasi-perangkat",
+            text: "User",
+            path: "/vio/account/user",
           },
           {
-            text: "Topologi Jaringan",
-            path: "/dashboard/manajemen-jaringan/topologi-jaringan",
-          },
-          {
-            text: "VLAN & IP",
-            path: "/dashboard/manajemen-jaringan/pengaturan-vlan-ip",
-          },
-          {
-            text: "Pemantauan Jaringan",
-            path: "/dashboard/manajemen-jaringan/pemantauan-jaringan",
+            text: "Role",
+            path: "/vio/account/role",
           },
         ],
       },

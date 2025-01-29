@@ -20,6 +20,7 @@ import { Icon } from "@iconify/react";
 import iTheme from "@/themes/themes";
 import useBreakpoints from "@/themes/breakpoints";
 import CompanyLogo from "@/components/CompanyLogo/page";
+import Link from "next/link";
 
 export function HeaderNav({
   title,
@@ -144,12 +145,14 @@ export function HeaderNav({
                   <ListItemText>Account</ListItemText>
                 </MenuItem>
                 <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <Icon icon="mdi:logout" height={22} color={red[600]} />
-                  </ListItemIcon>
-                  <ListItemText sx={{ color: red[600] }}>Logout</ListItemText>
-                </MenuItem>
+                <Link href="/">
+                  <MenuItem>
+                    <ListItemIcon>
+                      <Icon icon="mdi:logout" height={22} color={red[600]} />
+                    </ListItemIcon>
+                    <ListItemText sx={{ color: red[600] }}>Logout</ListItemText>
+                  </MenuItem>
+                </Link>
               </MenuList>
             </Paper>
           </Popover>

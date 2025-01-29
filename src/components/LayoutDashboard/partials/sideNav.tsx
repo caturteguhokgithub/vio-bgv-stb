@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 import { blue, grey, red } from "@mui/material/colors";
 import Stack from "@mui/material/Stack";
 import { Icon } from "@iconify/react";
-import { MenuItemsBgv } from "./menuItems";
+import { Group, Menu, MenuItemsBgv, MenuItemsVio } from "./menuItems";
 import CompanyLogo from "@/components/CompanyLogo/page";
 import useBreakpoints from "@/themes/breakpoints";
 
@@ -35,18 +35,40 @@ export function SideNav({
 
   const pathname = usePathname();
 
+  // useEffect(() => {
+  //   const newOpen: Record<string, boolean> = {};
+  //   MenuItemsVio.forEach((group, groupIndex) => {
+  //     group.items.forEach((item, itemIndex) => {
+  //       if (item.subItems) {
+  //         item.subItems.forEach((subItem) => {
+  //           if (pathname.startsWith(subItem.path)) {
+  //             newOpen[`${groupIndex}-${itemIndex}`] = true;
+  //           }
+  //         });
+  //       }
+  //     });
+  //   });
+  //   setOpen(newOpen);
+  // }, [pathname]);
+
+  const isGroup = (item: Group | Menu): item is Group => {
+    return (item as Group).items !== undefined;
+  };
+
   useEffect(() => {
     const newOpen: Record<string, boolean> = {};
-    MenuItemsBgv.forEach((group, groupIndex) => {
-      group.items.forEach((item, itemIndex) => {
-        if (item.subItems) {
-          item.subItems.forEach((subItem) => {
-            if (pathname.startsWith(subItem.path)) {
-              newOpen[`${groupIndex}-${itemIndex}`] = true;
-            }
-          });
-        }
-      });
+    MenuItemsVio.forEach((group, groupIndex) => {
+      if (isGroup(group)) {
+        group.items.forEach((item, itemIndex) => {
+          if (item.subItems) {
+            item.subItems.forEach((subItem) => {
+              if (pathname.startsWith(subItem.path)) {
+                newOpen[`${groupIndex}-${itemIndex}`] = true;
+              }
+            });
+          }
+        });
+      }
     });
     setOpen(newOpen);
   }, [pathname]);
@@ -136,160 +158,211 @@ export function SideNav({
           overflowX: "hidden",
         }}
       >
-        <Stack spacing={3} sx={{ listStyle: "none", m: 0, p: 0 }}>
-          {MenuItemsBgv.map((menu, groupIndex) => (
-            <Box key={groupIndex}>
-              <Typography
-                component="h3"
-                fontWeight={600}
-                color={grey[400]}
-                fontSize="0.7rem"
-                px={1}
-                mb={1}
-                textTransform="uppercase"
-              >
-                {menu.groupName}
-              </Typography>
-              {menu.groupName && (
-                <List component="ul" sx={{ listStyle: "none", m: 0, p: 0 }}>
-                  {menu.items.map((item, itemIndex) => (
-                    <React.Fragment key={item.text}>
-                      <ListItem
-                        onClick={() =>
-                          handleClick(groupIndex, itemIndex, !!item.subItems)
-                        }
-                        sx={{
-                          px: toggleCollapse && !toggleHoverCollapse ? 0 : 2,
-                          justifyContent:
-                            toggleCollapse && !toggleHoverCollapse
-                              ? "center"
-                              : "unset",
-                          gap: 1,
-                          ...(isActive(item.path) && {
-                            bgcolor: alpha(red[700], 0.15),
-                            //   "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
-                            boxShadow: "rgba(0, 0, 0, 0.1) 0px 3px 8px",
-                          }),
-                          borderRadius: 1,
-                          userSelect: "none",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <ListItemAvatar
+        <Stack spacing={1}>
+          {MenuItemsVio.map((menu, groupIndex) => (
+            <Box key={groupIndex} my="4px !important">
+              {isGroup(menu) ? (
+                <Fragment>
+                  <Typography
+                    component="h3"
+                    fontWeight={600}
+                    color={grey[400]}
+                    fontSize="0.7rem"
+                    px={1}
+                    mb={0.5}
+                    mt={2.5}
+                    textTransform="uppercase"
+                  >
+                    {menu.groupName}
+                  </Typography>
+                  <List component="ul" sx={{ listStyle: "none", m: 0, p: 0 }}>
+                    {menu.items.map((item, itemIndex) => (
+                      <React.Fragment key={item.text}>
+                        <ListItem
+                          onClick={() =>
+                            handleClick(groupIndex, itemIndex, !!item.subItems)
+                          }
                           sx={{
-                            minWidth: 0,
-                            display: "inline-flex",
-                            alignItems: "center",
+                            px: toggleCollapse && !toggleHoverCollapse ? 0 : 2,
+                            justifyContent:
+                              toggleCollapse && !toggleHoverCollapse
+                                ? "center"
+                                : "unset",
+                            gap: 1,
+                            ...(isActive(item.path) && {
+                              bgcolor: alpha(red[700], 0.15),
+                              boxShadow: "rgba(0, 0, 0, 0.1) 0px 3px 8px",
+                            }),
+                            borderRadius: 1,
+                            userSelect: "none",
+                            cursor: "pointer",
                           }}
                         >
-                          <Icon
-                            icon={item.icon}
-                            color={isActive(item.path) ? red[700] : "black"}
-                            height={
-                              toggleCollapse && !toggleHoverCollapse ? 24 : 18
-                            }
-                          />
-                        </ListItemAvatar>
-                        {toggleCollapse && !toggleHoverCollapse ? null : (
+                          <ListItemAvatar
+                            sx={{
+                              minWidth: 0,
+                              display: "inline-flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Icon
+                              icon={item.icon}
+                              color={isActive(item.path) ? red[700] : "black"}
+                              height={
+                                toggleCollapse && !toggleHoverCollapse ? 24 : 18
+                              }
+                            />
+                          </ListItemAvatar>
+                          {toggleCollapse && !toggleHoverCollapse ? null : (
+                            <>
+                              <ListItemText>
+                                <Typography
+                                  color={
+                                    isActive(item.path) ? red[700] : "black"
+                                  }
+                                  fontSize={14}
+                                >
+                                  {item.text}
+                                </Typography>
+                              </ListItemText>
+                              {item.subItems ? (
+                                open[`${groupIndex}-${itemIndex}`] ? (
+                                  <Icon icon="material-symbols-light:keyboard-arrow-up" />
+                                ) : (
+                                  <Icon icon="material-symbols-light:keyboard-arrow-down" />
+                                )
+                              ) : null}
+                            </>
+                          )}
+                        </ListItem>
+                        {(!toggleCollapse || toggleHoverCollapse) && (
                           <>
-                            <ListItemText>
-                              <Typography
-                                color={isActive(item.path) ? red[700] : "black"}
-                                fontSize={14}
+                            {item.subItems && (
+                              <Collapse
+                                in={open[`${groupIndex}-${itemIndex}`]}
+                                timeout="auto"
+                                mountOnEnter
+                                unmountOnExit
                               >
-                                {item.text}
-                              </Typography>
-                            </ListItemText>
-                            {item.subItems ? (
-                              open[`${groupIndex}-${itemIndex}`] ? (
-                                <Icon icon="material-symbols-light:keyboard-arrow-up" />
-                              ) : (
-                                <Icon icon="material-symbols-light:keyboard-arrow-down" />
-                              )
-                            ) : null}
-                          </>
-                        )}
-                      </ListItem>
-                      {(!toggleCollapse || toggleHoverCollapse) && (
-                        <>
-                          {item.subItems && (
-                            <Collapse
-                              in={open[`${groupIndex}-${itemIndex}`]}
-                              timeout="auto"
-                              mountOnEnter
-                              unmountOnExit
-                            >
-                              <List
-                                component="div"
-                                disablePadding
-                                sx={{
-                                  pr: 5,
-                                  mt: 0.5,
-                                  mb: 2,
-                                  listStyleType: "disc",
-                                  a: {
-                                    "&::marker": {
-                                      color: grey[400],
-                                      transition: "all 300ms ease",
-                                    },
-                                    "&:hover": {
+                                <List
+                                  component="div"
+                                  disablePadding
+                                  sx={{
+                                    pr: 5,
+                                    mt: 0.5,
+                                    mb: 2,
+                                    listStyleType: "disc",
+                                    a: {
                                       "&::marker": {
-                                        color: red[700],
-                                      },
-                                    },
-                                  },
-                                }}
-                              >
-                                {item.subItems.map((subItem) => (
-                                  <ListItem
-                                    key={subItem.text}
-                                    component={Link}
-                                    href={subItem.path}
-                                    sx={{
-                                      display: "list-item",
-                                      ml: 5,
-                                      px: 0,
-                                      py: 0.7,
-                                      borderRadius: 1,
-                                      span: {
+                                        color: grey[400],
                                         transition: "all 300ms ease",
                                       },
-                                      "&::marker": {
-                                        color:
-                                          pathname === subItem.path
-                                            ? `${red[700]} !important`
-                                            : grey[400],
-                                      },
                                       "&:hover": {
-                                        span: {
+                                        "&::marker": {
                                           color: red[700],
                                         },
                                       },
-                                    }}
-                                  >
-                                    {/* <ListItemText sx={{ m: 0 }}> */}
-                                    <Typography
-                                      component="span"
-                                      color={
-                                        pathname === subItem.path
-                                          ? red[700]
-                                          : "black"
-                                      }
-                                      fontSize="0.83rem"
-                                      lineHeight={1}
+                                    },
+                                  }}
+                                >
+                                  {item.subItems.map((subItem) => (
+                                    <ListItem
+                                      key={subItem.text}
+                                      component={Link}
+                                      href={subItem.path}
+                                      sx={{
+                                        display: "list-item",
+                                        ml: 5,
+                                        px: 0,
+                                        py: 0.7,
+                                        borderRadius: 1,
+                                        span: {
+                                          transition: "all 300ms ease",
+                                        },
+                                        "&::marker": {
+                                          color:
+                                            pathname === subItem.path
+                                              ? `${red[700]} !important`
+                                              : grey[400],
+                                        },
+                                        "&:hover": {
+                                          span: {
+                                            color: red[700],
+                                          },
+                                        },
+                                      }}
                                     >
-                                      {subItem.text}
-                                    </Typography>
-                                    {/* </ListItemText> */}
-                                  </ListItem>
-                                ))}
-                              </List>
-                            </Collapse>
-                          )}
-                        </>
-                      )}
-                    </React.Fragment>
-                  ))}
+                                      <Typography
+                                        component="span"
+                                        color={
+                                          pathname === subItem.path
+                                            ? red[700]
+                                            : "black"
+                                        }
+                                        fontSize="0.83rem"
+                                        lineHeight={1}
+                                      >
+                                        {subItem.text}
+                                      </Typography>
+                                    </ListItem>
+                                  ))}
+                                </List>
+                              </Collapse>
+                            )}
+                          </>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </List>
+                </Fragment>
+              ) : (
+                <List component="ul" sx={{ listStyle: "none", m: 0, p: 0 }}>
+                  <ListItem
+                    component={Link}
+                    href={menu.path}
+                    onClick={() => handleClick(groupIndex, 0, false)}
+                    sx={{
+                      px: toggleCollapse && !toggleHoverCollapse ? 0 : 2,
+                      justifyContent:
+                        toggleCollapse && !toggleHoverCollapse
+                          ? "center"
+                          : "unset",
+                      gap: 1,
+                      ...(isActive(menu.path) && {
+                        bgcolor: alpha(red[700], 0.15),
+                        boxShadow: "rgba(0, 0, 0, 0.1) 0px 3px 8px",
+                      }),
+                      borderRadius: 1,
+                      userSelect: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <ListItemAvatar
+                      sx={{
+                        minWidth: 0,
+                        display: "inline-flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Icon
+                        icon={menu.icon}
+                        color={isActive(menu.path) ? red[700] : "black"}
+                        height={
+                          toggleCollapse && !toggleHoverCollapse ? 24 : 18
+                        }
+                      />
+                    </ListItemAvatar>
+                    {toggleCollapse && !toggleHoverCollapse ? null : (
+                      <ListItemText>
+                        <Typography
+                          color={isActive(menu.path) ? red[700] : "black"}
+                          fontSize={14}
+                        >
+                          {menu.text}
+                        </Typography>
+                      </ListItemText>
+                    )}
+                  </ListItem>
                 </List>
               )}
             </Box>
