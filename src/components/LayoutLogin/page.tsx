@@ -130,7 +130,7 @@ export default function LayoutLogin({
           ) : (
             children
           )}
-          <Stack pb={3}>
+          <Stack>
             <Typography fontSize="12px" color={grey[500]} align="center">
               Copyright {new Date().getFullYear()} &copy; Vio BGV Set Top Box
             </Typography>

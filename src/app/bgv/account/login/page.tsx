@@ -81,6 +81,28 @@ export default function Login() {
             />
           </FormControl>
         </Grid>
+        <Grid size={12}>
+          <FormControl fullWidth>
+            <TextField
+              placeholder="Add Referral Code"
+              variant="outlined"
+              slotProps={{ inputLabel: { shrink: true } }}
+              sx={{
+                input: {
+                  color: "white",
+                  backgroundColor: "rgba( 255, 255, 255, 0.1)",
+                  border: "1px solid rgba( 255, 255, 255, 0.5)",
+                  borderRadius: 2,
+
+                  "&::placeholder": {
+                    color: grey[400],
+                    opacity: 1,
+                  },
+                },
+              }}
+            />
+          </FormControl>
+        </Grid>
         <Grid size={12} py={1}>
           <FormControl fullWidth>
             <Button
